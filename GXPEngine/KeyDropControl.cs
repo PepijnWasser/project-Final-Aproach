@@ -10,6 +10,10 @@ namespace GXPEngine
         List<KeyDrop> _keyDrops;
         int millisecondCounter;
         int timeToNextKey;
+        int KeyStreak;
+        int streakCount;
+
+        int streakPosition = 1;
 
         public int GetNumberOfKeyDrops()
         {
@@ -24,25 +28,52 @@ namespace GXPEngine
 
         void Update()
         {
-            millisecondCounter = millisecondCounter + Time.deltaTime;
-            if(millisecondCounter > timeToNextKey)
+            millisecondCounter += Time.deltaTime;
+
+            if (KeyStreak == 1)
             {
-                AddKeyDrop();
-                test();
-                TimeBeforeNextKey();
-                millisecondCounter = 0;
+                if (millisecondCounter > timeToNextKey)
+                {
+                    AddKeyDrop(true);
+                    test();
+                    millisecondCounter = 0;
+                    streakCount = streakCount + 1;
+
+                    if (streakCount > 10)
+                    {
+                        streakCount = 0;
+                        SpawnKeyTime();
+                    }
+                }
             }
-         
+            else if (millisecondCounter > timeToNextKey)
+            {
+                 AddKeyDrop(false);
+                 test();
+                 SpawnKeyTime();
+                 millisecondCounter = 0;
+            } 
         }
 
-        void TimeBeforeNextKey()
+        void SpawnKeyTime()
         {
-            timeToNextKey = 250 + Utils.Random(0, 500);
+            KeyStreak = Utils.Random(1, 4);
+            if(KeyStreak == 1)
+            {
+                timeToNextKey = 90;
+                streakPosition = Utils.Random(1, 5);
+                Console.WriteLine("test");
+
+            }
+            else
+            {
+                timeToNextKey = 250 + Utils.Random(0, 500);
+            }
         }
 
-        void AddKeyDrop()
+        void AddKeyDrop(bool streak)
         {
-            KeyDrop _keyDrop = new KeyDrop();
+            KeyDrop _keyDrop = new KeyDrop(this, streak);
             AddChild(_keyDrop);
             _keyDrops.Add(_keyDrop);
         }
@@ -51,8 +82,16 @@ namespace GXPEngine
         {
             for(int i = 0; i < _keyDrops.Count; i++)
             {
-                Console.WriteLine("test");
+                
             }
         }
+
+        public int GetStreakPosition()
+        {
+            return streakPosition;
+        }
+
     }
+
+ 
 }

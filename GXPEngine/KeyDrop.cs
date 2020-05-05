@@ -9,16 +9,29 @@ namespace GXPEngine
     {
         public string buttonToPress;
         int speed = 10;
+        int column;
+        bool _streak;
+        KeyDropControl _keyDropControl;
 
-        public KeyDrop() : base("square.png")
-        {
-            SetPosition();
+        public KeyDrop(KeyDropControl keyDropControl, bool streak) : base("square.png")
+        {       
             SetButton();
+            _streak = streak;
+            _keyDropControl = keyDropControl;
+            SetPosition();
         }
 
         void SetPosition()
         {
-            int column = Utils.Random(1, 5);
+            if(_streak == true)
+            {
+                Console.WriteLine(_streak);
+                column = _keyDropControl.GetStreakPosition();
+            }
+            else
+            {
+                column = Utils.Random(1, 5);       
+            }
             if (column == 1)
             {
                 this.SetXY(1250, 0);
