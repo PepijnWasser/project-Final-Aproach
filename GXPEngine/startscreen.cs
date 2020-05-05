@@ -17,8 +17,6 @@ namespace GXPEngine
         {
 
         }
-
-        //test
         
         /// ///////////////////////////////////////////////////////////////////////
         /// if E is pressed, return true
