@@ -1,0 +1,10 @@
+C:\Users\peppi\OneDrive\Desktop\gxpengine\project lift off\GXPEngine\bin\Debug\GXPEngine.exe
+C:\Users\peppi\OneDrive\Desktop\gxpengine\project lift off\GXPEngine\bin\Debug\GXPEngine.pdb
+C:\Users\peppi\OneDrive\Desktop\gxpengine\project lift off\GXPEngine\obj\x86\Debug\GXPEngine.csprojAssemblyReference.cache
+C:\Users\peppi\OneDrive\Desktop\gxpengine\project lift off\GXPEngine\obj\x86\Debug\GXPEngine.exe
+C:\Users\peppi\OneDrive\Desktop\gxpengine\project lift off\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project lift off\GXPEngine\bin\Debug\GXPEngine.exe
+C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project lift off\GXPEngine\bin\Debug\GXPEngine.pdb
+C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project lift off\GXPEngine\obj\x86\Debug\GXPEngine.csprojAssemblyReference.cache
+C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project lift off\GXPEngine\obj\x86\Debug\GXPEngine.exe
+C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project lift off\GXPEngine\obj\x86\Debug\GXPEngine.pdb
