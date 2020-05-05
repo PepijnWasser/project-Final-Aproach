@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,7 @@ namespace GXPEngine
         int _levelSecondCounter;
 
         Background space = new Background();
+        KeyDropControl keyDropControl = new KeyDropControl();
 
         SoundChannel _musicChannel;
         Sound _music;
@@ -21,7 +22,8 @@ namespace GXPEngine
             _music = new Sound("music.wav", true, false);
             _musicChannel = _music.Play();
 
-            AddChild(space);      
+            AddChild(space);
+            AddChild(keyDropControl);
         }
 
         void Update()
