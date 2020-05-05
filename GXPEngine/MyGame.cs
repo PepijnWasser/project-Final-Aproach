@@ -5,7 +5,7 @@ using GXPEngine;								// GXPEngine contains the engine
 public class MyGame : Game
 {
 	//----------------change size to correct screen size
-	public MyGame() : base(1920, 1080, true)		
+	public MyGame() : base(1920, 1080, false)		
 	{		
 		Screens screen = new Screens();
 		AddChild(screen);	
