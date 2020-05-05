@@ -5,7 +5,7 @@ using GXPEngine;								// GXPEngine contains the engine
 public class MyGame : Game
 {
 	//----------------change size to correct screen size
-	public MyGame() : base(600, 780, false)		// Create a window that's 800x600 and NOT fullscreen
+	public MyGame() : base(1920, 1080, false)		// Create a window that's 800x600 and NOT fullscreen
 	{		
 		Screens screen = new Screens();
 		AddChild(screen);	
