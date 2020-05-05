@@ -8,6 +8,8 @@ namespace GXPEngine
     class KeyDropControl : Canvas
     {
         List<KeyDrop> _keyDrops;
+        int millisecondCounter;
+        int timeToNextKey;
 
         public int GetNumberOfKeyDrops()
         {
@@ -22,8 +24,20 @@ namespace GXPEngine
 
         void Update()
         {
-            AddKeyDrop();
-            test();
+            millisecondCounter = millisecondCounter + Time.deltaTime;
+            if(millisecondCounter > timeToNextKey)
+            {
+                AddKeyDrop();
+                test();
+                TimeBeforeNextKey();
+                millisecondCounter = 0;
+            }
+         
+        }
+
+        void TimeBeforeNextKey()
+        {
+            timeToNextKey = 250 + Utils.Random(0, 500);
         }
 
         void AddKeyDrop()

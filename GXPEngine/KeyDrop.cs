@@ -8,7 +8,7 @@ namespace GXPEngine
     class KeyDrop : Sprite
     {
         public string buttonToPress;
-        int speed = 2;
+        int speed = 10;
 
         public KeyDrop() : base("square.png")
         {
