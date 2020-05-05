@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,7 @@ namespace GXPEngine
     class KeyDrop : Sprite
     {
         public string buttonToPress;
+        int speed = 2;
 
         public KeyDrop() : base("square.png")
         {
@@ -48,6 +49,11 @@ namespace GXPEngine
             {
                 buttonToPress = "B";
             }
+        }
+
+        void Update()
+        {
+            this.y = this.y + speed;
         }
     }
 }
