@@ -8,14 +8,13 @@ namespace GXPEngine
     class KeyDrop : AnimationSprite
     {
         public string buttonToPress;
-        int speed = 15;
+        int speed = 20;
         int column;
         bool _streak;
         KeyDropControl _keyDropControl;
 
         public KeyDrop(KeyDropControl keyDropControl, bool streak) : base("keyanimation.png", 2, 1)
         {
-            SetButton();
             _streak = streak;
             _keyDropControl = keyDropControl;
             SetPosition();
@@ -52,20 +51,6 @@ namespace GXPEngine
             }
         }
 
-        void SetButton()
-        {
-            int button = Utils.Random(1, 3);
-
-            if (button == 1)
-            {
-                buttonToPress = "A";
-            }
-            if (button == 2)
-            {
-                buttonToPress = "B";
-            }
-        }
-
         void Update()
         {
             Fall();
@@ -77,18 +62,18 @@ namespace GXPEngine
         void TestKeyPress()
         {
             MyGame myGame = (MyGame)game;
-            if (this.y > myGame.height - 500)
+            if (this.y > myGame.height - 200)
             {
                 if(currentFrame == 0)
                 {
-                    if (Input.GetKeyDown(Key.S))
+                    if (Input.GetKey(Key.S))
                     {
                         this.LateDestroy();
                     }
                 }
                 if (currentFrame == 1)
                 {
-                    if (Input.GetKeyDown (Key.B))
+                    if (Input.GetKey (Key.B))
                     {
                         this.LateDestroy();
                     }
