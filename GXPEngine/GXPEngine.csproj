@@ -42,7 +42,9 @@
     <Compile Include="EndScreen.cs" />
     <Compile Include="screens.cs" />
     <Compile Include="KeyDropControl.cs" />
+    <Compile Include="KeyDropRowController.cs" />
     <Compile Include="KeyDrop.cs" />
+    <Compile Include="speaker.cs" />
     <Compile Include="level.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GXPEngine\Canvas.cs" />
