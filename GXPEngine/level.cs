@@ -17,6 +17,8 @@ namespace GXPEngine
         SoundChannel _musicChannel;
         Sound _music;
 
+        Speaker _speaker = new Speaker();
+
         public Level() : base(600, 1080, false)
         {
             _music = new Sound("music.wav", true, false);
@@ -24,6 +26,7 @@ namespace GXPEngine
 
             AddChild(space);
             AddChild(keyDropControl);
+            AddChild(_speaker);
         }
 
         void Update()
@@ -48,7 +51,7 @@ namespace GXPEngine
 
         public bool ChangeScreen()
         {
-            if(Input.GetKey(Key.A))
+            if(Input.GetKey(Key.P))
             {
                 _musicChannel.Stop();
                 return true;

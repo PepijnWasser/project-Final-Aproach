@@ -8,12 +8,14 @@ namespace GXPEngine
     class KeyDropControl : Canvas
     {
         List<KeyDrop> _keyDrops;
+        KeyDropRowController _keyDropRowController;
+
         int millisecondCounter;
         int timeToNextKey;
         int KeyStreak;
         int streakCount;
 
-        int streakPosition = 1;
+        int KeyDropPosition = 1;
 
         public int GetNumberOfKeyDrops()
         {
@@ -23,7 +25,9 @@ namespace GXPEngine
 
         public KeyDropControl() : base (1920, 1080)
         {
-            _keyDrops = new List<KeyDrop>();         
+            _keyDrops = new List<KeyDrop>();
+            _keyDropRowController = new KeyDropRowController();
+            AddChild(_keyDropRowController);
         }
 
         void Update()
@@ -34,61 +38,58 @@ namespace GXPEngine
             {
                 if (millisecondCounter > timeToNextKey)
                 {
-                    AddKeyDrop(true);
-                    test();
+                    AddKeyDrop();
+
                     millisecondCounter = 0;
                     streakCount = streakCount + 1;
 
                     if (streakCount > 10)
                     {
                         streakCount = 0;
-                        SpawnKeyTime();
+                        SetKeyProperties();
                     }
                 }
             }
             else if (millisecondCounter > timeToNextKey)
             {
-                 AddKeyDrop(false);
-                 test();
-                 SpawnKeyTime();
+                 AddKeyDrop();
+                 SetKeyProperties();
                  millisecondCounter = 0;
             } 
         }
 
-        void SpawnKeyTime()
+        void SetKeyProperties()
         {
             KeyStreak = Utils.Random(1, 8);
             if(KeyStreak == 1)
             {
                 timeToNextKey = 50;
-                streakPosition = Utils.Random(1, 5);
-                Console.WriteLine("test");
-
             }
             else
             {
                 timeToNextKey = 250 + Utils.Random(0, 500);
             }
+            KeyDropPosition = Utils.Random(_keyDropRowController.row - 1, _keyDropRowController.row + 2);
+            if(KeyDropPosition < 1)
+            {
+                KeyDropPosition = 4;
+            }
+            if (KeyDropPosition > 4)
+            {
+                KeyDropPosition = 1;
+            }
         }
 
-        void AddKeyDrop(bool streak)
+        void AddKeyDrop()
         {
-            KeyDrop _keyDrop = new KeyDrop(this, streak);
+            KeyDrop _keyDrop = new KeyDrop(KeyDropPosition);
             AddChild(_keyDrop);
             _keyDrops.Add(_keyDrop);
         }
 
-        void test()
+        public int GetKeyDropPosition()
         {
-            for(int i = 0; i < _keyDrops.Count; i++)
-            {
-                
-            }
-        }
-
-        public int GetStreakPosition()
-        {
-            return streakPosition;
+            return KeyDropPosition;
         }
 
     }

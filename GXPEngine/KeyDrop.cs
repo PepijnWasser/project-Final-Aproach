@@ -7,30 +7,21 @@ namespace GXPEngine
 {
     class KeyDrop : AnimationSprite
     {
-        public string buttonToPress;
-        int speed = 20;
+        int speed = 10;
         int column;
-        bool _streak;
-        KeyDropControl _keyDropControl;
 
-        public KeyDrop(KeyDropControl keyDropControl, bool streak) : base("keyanimation.png", 2, 1)
+        int _rowControl;
+
+        public KeyDrop(int RowControl) : base("keyanimation.png", 4, 1)
         {
-            _streak = streak;
-            _keyDropControl = keyDropControl;
+            _rowControl = RowControl;
             SetPosition();
         }
 
         void SetPosition()
         {
-            if (_streak == true)
-            {
-                Console.WriteLine(_streak);
-                column = _keyDropControl.GetStreakPosition();
-            }
-            else
-            {
-                column = Utils.Random(1, 5);
-            }
+            column = _rowControl;
+
             if (column == 1)
             {
                 this.SetXY(1250, 0);
@@ -38,15 +29,19 @@ namespace GXPEngine
             if (column == 2)
             {
                 this.SetXY(1325, 0);
+                NextFrame();
             }
             if (column == 3)
             {
                 this.SetXY(1400, 0);
                 NextFrame();
+                NextFrame();
             }
             if (column == 4)
             {
                 this.SetXY(1475, 0);
+                NextFrame();
+                NextFrame();
                 NextFrame();
             }
         }
@@ -66,14 +61,28 @@ namespace GXPEngine
             {
                 if(currentFrame == 0)
                 {
-                    if (Input.GetKey(Key.S))
+                    if (Input.GetKey(Key.A))
                     {
                         this.LateDestroy();
                     }
                 }
                 if (currentFrame == 1)
                 {
-                    if (Input.GetKey (Key.B))
+                    if (Input.GetKey (Key.S))
+                    {
+                        this.LateDestroy();
+                    }
+                }
+                if (currentFrame == 2)
+                {
+                    if (Input.GetKey(Key.D))
+                    {
+                        this.LateDestroy();
+                    }
+                }
+                if (currentFrame == 3)
+                {
+                    if (Input.GetKey(Key.F))
                     {
                         this.LateDestroy();
                     }
