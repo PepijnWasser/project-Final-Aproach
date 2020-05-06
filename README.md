@@ -1,5 +1,3 @@
 # project-Final-Aproach
 
-test
-
-test 2
+Make sure to update screen size in myGame to something else and back
