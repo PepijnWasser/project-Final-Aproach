@@ -57,10 +57,10 @@ namespace GXPEngine
 
         void SpawnKeyTime()
         {
-            KeyStreak = Utils.Random(1, 4);
+            KeyStreak = Utils.Random(1, 8);
             if(KeyStreak == 1)
             {
-                timeToNextKey = 90;
+                timeToNextKey = 50;
                 streakPosition = Utils.Random(1, 5);
                 Console.WriteLine("test");
 
