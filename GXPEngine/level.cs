@@ -32,6 +32,15 @@ namespace GXPEngine
         void Update()
         {
             BackgroundControl();
+            TestAnimatables();
+        }
+
+        void TestAnimatables()
+        {
+            if (keyDropControl.hitSpeaker)
+            {
+                _speaker.PlayAnimation();
+            }
         }
 
         void BackgroundControl()
@@ -48,6 +57,7 @@ namespace GXPEngine
                 _levelSecondCounter = 0;
             }
         }  
+
 
         public bool ChangeScreen()
         {
