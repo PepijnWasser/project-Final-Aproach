@@ -5,108 +5,156 @@ using System.Text;
 
 namespace GXPEngine
 {
-    class KeyDrop : AnimationSprite
+    class KeyDropControl : Canvas
     {
-        int speed = 20;
-        int column;
+        List<KeyDrop> _keyDrops;
+        KeyDropRowController _keyDropRowController;
 
-        int _rowControl;
+        int millisecondCounter;
+        int timeToNextKey;
+        int KeyStreak;
+        int streakCount;
+
+        int KeyDropPosition = 1;
 
         public bool hitSpeaker;
-        public bool needToDestroy;
+        public bool hitLight;
 
-        public KeyDrop(int RowControl) : base("keyanimation.png", 4, 1)
+        public int GetNumberOfKeyDrops()
         {
-            _rowControl = RowControl;
-            SetPosition();
+            return _keyDrops.Count;
         }
 
-        void SetPosition()
+        public KeyDrop GetKeyDrop(int index)
         {
-            column = _rowControl;
+            if (index >= 0 && index < _keyDrops.Count)
+            {
+                return _keyDrops[index];
+            }
+            return null;
+        }
 
-            if (column == 1)
-            {
-                this.SetXY(1250, 0);
-            }
-            if (column == 2)
-            {
-                this.SetXY(1325, 0);
-                NextFrame();
-            }
-            if (column == 3)
-            {
-                this.SetXY(1400, 0);
-                NextFrame();
-                NextFrame();
-            }
-            if (column == 4)
-            {
-                this.SetXY(1475, 0);
-                NextFrame();
-                NextFrame();
-                NextFrame();
-            }
+
+        public KeyDropControl() : base (1920, 1080)
+        {
+            _keyDrops = new List<KeyDrop>();
+            _keyDropRowController = new KeyDropRowController();
+            AddChild(_keyDropRowController);
         }
 
         void Update()
         {
-            Fall();
-            OutOfBounds();
-            TestKeyPress();
+            millisecondCounter += Time.deltaTime;
 
+            if (KeyStreak == 1)
+            {
+                if (millisecondCounter > timeToNextKey)
+                {
+                    AddKeyDrop();
+
+                    millisecondCounter = 0;
+                    streakCount = streakCount + 1;
+
+                    if (streakCount > 10)
+                    {
+                        streakCount = 0;
+                        SetKeyProperties();
+                    }
+                }
+            }
+            else if (millisecondCounter > timeToNextKey)
+            {
+                 AddKeyDrop();
+                 SetKeyProperties();
+                 millisecondCounter = 0;
+            }
+            TestHits();
+            DeleteKeyDrops();
+            
+            
         }
 
-        void TestKeyPress()
+        void SetKeyProperties()
         {
-            MyGame myGame = (MyGame)game;
-            if (this.y > myGame.height - 200)
+            KeyStreak = Utils.Random(1, 8);
+            if(KeyStreak == 1)
             {
-                if(currentFrame == 0)
+                timeToNextKey = 50;
+            }
+            else
+            {
+                timeToNextKey = 250 + Utils.Random(0, 500);
+            }
+            KeyDropPosition = Utils.Random(_keyDropRowController.row - 1, _keyDropRowController.row + 2);
+            if(KeyDropPosition < 1)
+            {
+                KeyDropPosition = 4;
+            }
+            if (KeyDropPosition > 4)
+            {
+                KeyDropPosition = 1;
+            }
+        }
+
+        void TestHits()
+        {
+            int numberOfSpeakerFails = 0;
+            int numberOfLightFails = 0;
+            for (int j = 0; j < _keyDrops.Count; j++)
+            {
+                if (_keyDrops[j].hitSpeaker)
                 {
-                    if (Input.GetKey(Key.A))
-                    {
-                        needToDestroy = true;
-                        hitSpeaker = true;
-                        Console.WriteLine(hitSpeaker);
-                    }
+                    hitSpeaker = true;
                 }
-                if (currentFrame == 1)
+                else
                 {
-                    if (Input.GetKey (Key.S))
-                    {
-                        needToDestroy = true;
-                    }
+                    numberOfSpeakerFails = numberOfSpeakerFails + 1;               
                 }
-                if (currentFrame == 2)
+                if (_keyDrops[j].hitLight)
                 {
-                    if (Input.GetKey(Key.D))
-                    {
-                        needToDestroy = true;
-                    }
+                    hitLight = true;
                 }
-                if (currentFrame == 3)
+                else
                 {
-                    if (Input.GetKey(Key.F))
-                    {
-                        needToDestroy = true;
-                    }
+                    numberOfLightFails = numberOfLightFails + 1;
+                }
+            }
+            if (numberOfSpeakerFails == _keyDrops.Count)
+            {
+                hitSpeaker = false;
+            }
+            if (numberOfLightFails == _keyDrops.Count)
+            {
+                hitLight = false;
+            }
+        }
+
+        void DeleteKeyDrops()
+        {
+            for (int i = 0; i < _keyDrops.Count; i++)
+            {
+                if (_keyDrops[i].needToDestroy)
+                {
+                    _keyDrops[i].LateDestroy();
+                    _keyDrops[i] = null;
+                    _keyDrops.Remove(_keyDrops[i]);
                 }
             }
         }
 
-        void Fall()
+        void AddKeyDrop()
         {
-            this.y = this.y + speed;
+            KeyDrop _keyDrop = new KeyDrop(KeyDropPosition);
+            AddChild(_keyDrop);
+            _keyDrops.Add(_keyDrop);
         }
 
-        void OutOfBounds()
+        public int GetKeyDropPosition()
         {
-            MyGame myGame = (MyGame)game;
-            if (this.y > myGame.height)
-            {
-                needToDestroy = true;
-            }
+            return KeyDropPosition;
         }
+
     }
+
+ 
 }

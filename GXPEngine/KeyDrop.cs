@@ -13,6 +13,7 @@ namespace GXPEngine
         int _rowControl;
 
         public bool hitSpeaker;
+        public bool hitLight;
         public bool needToDestroy;
 
         public KeyDrop(int RowControl) : base("keyanimation.png", 4, 1)
@@ -68,7 +69,6 @@ namespace GXPEngine
                     {
                         needToDestroy = true;
                         hitSpeaker = true;
-                        Console.WriteLine(hitSpeaker);
                     }
                 }
                 if (currentFrame == 1)
@@ -82,6 +82,7 @@ namespace GXPEngine
                 {
                     if (Input.GetKey(Key.D))
                     {
+                        hitLight = true;
                         needToDestroy = true;
                     }
                 }

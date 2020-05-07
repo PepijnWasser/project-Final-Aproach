@@ -18,6 +18,9 @@ namespace GXPEngine
         Sound _music;
 
         Speaker _speaker = new Speaker();
+        Light _light = new Light();
+
+        Bandmembers _bandmembers = new Bandmembers();
 
         public Level() : base(600, 1080, false)
         {
@@ -27,6 +30,8 @@ namespace GXPEngine
             AddChild(space);
             AddChild(keyDropControl);
             AddChild(_speaker);
+            AddChild(_light);
+            AddChild(_bandmembers);
         }
 
         void Update()
@@ -40,6 +45,10 @@ namespace GXPEngine
             if (keyDropControl.hitSpeaker)
             {
                 _speaker.PlayAnimation();
+            }
+            if (keyDropControl.hitLight)
+            {
+                _light.PlayAnimation();
             }
         }
 

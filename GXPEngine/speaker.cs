@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +28,7 @@ namespace GXPEngine
                     millisecondCounter = 0;
                     NextFrame();
                 }
-                if(amountOfLoops > 15 && currentFrame == 0)
+                if(amountOfLoops > 30 && currentFrame == 0)
                 {
                     amountOfLoops = 0;
                     playingAnimation = false;
