@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
@@ -19,6 +20,7 @@ namespace GXPEngine
 
         public bool hitSpeaker;
         public bool hitLight;
+        public bool failed;
 
         public int GetNumberOfKeyDrops()
         {
@@ -70,8 +72,6 @@ namespace GXPEngine
             }
             TestHits();
             DeleteKeyDrops();
-            
-            
         }
 
         void SetKeyProperties()
@@ -100,8 +100,17 @@ namespace GXPEngine
         {
             int numberOfSpeakerFails = 0;
             int numberOfLightFails = 0;
+            int numberOfSucceeds = 0;
             for (int j = 0; j < _keyDrops.Count; j++)
             {
+                if (_keyDrops[j].failed)
+                {
+                    failed = true;
+                }
+                else
+                {
+                    numberOfSucceeds = numberOfSucceeds + 1;
+                }
                 if (_keyDrops[j].hitSpeaker)
                 {
                     hitSpeaker = true;
@@ -122,6 +131,10 @@ namespace GXPEngine
             if (numberOfSpeakerFails == _keyDrops.Count)
             {
                 hitSpeaker = false;
+            }
+            if (numberOfSucceeds == _keyDrops.Count)
+            {
+                failed = false;
             }
             if (numberOfLightFails == _keyDrops.Count)
             {

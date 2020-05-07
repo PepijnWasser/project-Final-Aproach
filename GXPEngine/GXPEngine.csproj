@@ -37,8 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
+    <Compile Include="Bandmembers.cs" />
+    <Compile Include="satisfactionBar.cs" />
+    <Compile Include="Drummer.cs" />
     <Compile Include="Lights.cs" />
     <Compile Include="speaker.cs" />
     <Compile Include="KeyDropRowController.cs" />

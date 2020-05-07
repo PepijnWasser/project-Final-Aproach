@@ -22,6 +22,8 @@ namespace GXPEngine
 
         Bandmembers _bandmembers = new Bandmembers();
 
+        SatisfactionBar _satisfactionBar = new SatisfactionBar();
+
         public Level() : base(600, 1080, false)
         {
             _music = new Sound("music.wav", true, false);
@@ -32,12 +34,26 @@ namespace GXPEngine
             AddChild(_speaker);
             AddChild(_light);
             AddChild(_bandmembers);
+            AddChild(_satisfactionBar);
         }
 
         void Update()
         {
             BackgroundControl();
             TestAnimatables();
+            TestScoring();
+        }
+
+        void TestScoring()
+        {
+            if(keyDropControl.failed == true)
+            {
+                _satisfactionBar.SetRemoveScore();
+            }
+            else if(keyDropControl.hitSpeaker == true || keyDropControl.hitLight == true)
+            {
+                _satisfactionBar.SetAddScore();
+            }
         }
 
         void TestAnimatables()
