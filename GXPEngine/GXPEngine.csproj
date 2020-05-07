@@ -37,14 +37,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Class2.cs" />
+    <Compile Include="Lights.cs" />
+    <Compile Include="speaker.cs" />
+    <Compile Include="KeyDropRowController.cs" />
     <Compile Include="textonscreen.cs" />
     <Compile Include="startscreen.cs" />
     <Compile Include="EndScreen.cs" />
     <Compile Include="screens.cs" />
     <Compile Include="KeyDropControl.cs" />
-    <Compile Include="KeyDropRowController.cs" />
     <Compile Include="KeyDrop.cs" />
-    <Compile Include="speaker.cs" />
     <Compile Include="level.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GXPEngine\Canvas.cs" />
