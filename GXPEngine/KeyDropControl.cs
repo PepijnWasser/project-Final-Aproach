@@ -5,94 +5,108 @@ using System.Text;
 
 namespace GXPEngine
 {
-    class KeyDropControl : Canvas
+    class KeyDrop : AnimationSprite
     {
-        List<KeyDrop> _keyDrops;
-        KeyDropRowController _keyDropRowController;
+        int speed = 20;
+        int column;
 
-        int millisecondCounter;
-        int timeToNextKey;
-        int KeyStreak;
-        int streakCount;
+        int _rowControl;
 
-        int KeyDropPosition = 1;
+        public bool hitSpeaker;
+        public bool needToDestroy;
 
-        public int GetNumberOfKeyDrops()
+        public KeyDrop(int RowControl) : base("keyanimation.png", 4, 1)
         {
-            return _keyDrops.Count;
+            _rowControl = RowControl;
+            SetPosition();
         }
 
-
-        public KeyDropControl() : base (1920, 1080)
+        void SetPosition()
         {
-            _keyDrops = new List<KeyDrop>();
-            _keyDropRowController = new KeyDropRowController();
-            AddChild(_keyDropRowController);
+            column = _rowControl;
+
+            if (column == 1)
+            {
+                this.SetXY(1250, 0);
+            }
+            if (column == 2)
+            {
+                this.SetXY(1325, 0);
+                NextFrame();
+            }
+            if (column == 3)
+            {
+                this.SetXY(1400, 0);
+                NextFrame();
+                NextFrame();
+            }
+            if (column == 4)
+            {
+                this.SetXY(1475, 0);
+                NextFrame();
+                NextFrame();
+                NextFrame();
+            }
         }
 
         void Update()
         {
-            millisecondCounter += Time.deltaTime;
+            Fall();
+            OutOfBounds();
+            TestKeyPress();
 
-            if (KeyStreak == 1)
+        }
+
+        void TestKeyPress()
+        {
+            MyGame myGame = (MyGame)game;
+            if (this.y > myGame.height - 200)
             {
-                if (millisecondCounter > timeToNextKey)
+                if(currentFrame == 0)
                 {
-                    AddKeyDrop();
-
-                    millisecondCounter = 0;
-                    streakCount = streakCount + 1;
-
-                    if (streakCount > 10)
+                    if (Input.GetKey(Key.A))
                     {
-                        streakCount = 0;
-                        SetKeyProperties();
+                        needToDestroy = true;
+                        hitSpeaker = true;
+                        Console.WriteLine(hitSpeaker);
+                    }
+                }
+                if (currentFrame == 1)
+                {
+                    if (Input.GetKey (Key.S))
+                    {
+                        needToDestroy = true;
+                    }
+                }
+                if (currentFrame == 2)
+                {
+                    if (Input.GetKey(Key.D))
+                    {
+                        needToDestroy = true;
+                    }
+                }
+                if (currentFrame == 3)
+                {
+                    if (Input.GetKey(Key.F))
+                    {
+                        needToDestroy = true;
                     }
                 }
             }
-            else if (millisecondCounter > timeToNextKey)
-            {
-                 AddKeyDrop();
-                 SetKeyProperties();
-                 millisecondCounter = 0;
-            } 
         }
 
-        void SetKeyProperties()
+        void Fall()
         {
-            KeyStreak = Utils.Random(1, 8);
-            if(KeyStreak == 1)
-            {
-                timeToNextKey = 50;
-            }
-            else
-            {
-                timeToNextKey = 250 + Utils.Random(0, 500);
-            }
-            KeyDropPosition = Utils.Random(_keyDropRowController.row - 1, _keyDropRowController.row + 2);
-            if(KeyDropPosition < 1)
-            {
-                KeyDropPosition = 4;
-            }
-            if (KeyDropPosition > 4)
-            {
-                KeyDropPosition = 1;
-            }
+            this.y = this.y + speed;
         }
 
-        void AddKeyDrop()
+        void OutOfBounds()
         {
-            KeyDrop _keyDrop = new KeyDrop(KeyDropPosition);
-            AddChild(_keyDrop);
-            _keyDrops.Add(_keyDrop);
+            MyGame myGame = (MyGame)game;
+            if (this.y > myGame.height)
+            {
+                needToDestroy = true;
+            }
         }
-
-        public int GetKeyDropPosition()
-        {
-            return KeyDropPosition;
-        }
-
     }
-
- 
 }

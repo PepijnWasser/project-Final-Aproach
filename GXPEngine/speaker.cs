@@ -1,15 +1,45 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace GXPEngine
 {
-    class Speaker : Sprite
+    class Speaker : AnimationSprite
     {
-        public Speaker() : base("tester.gif")
+        int millisecondCounter;
+        bool playingAnimation = false;
+        int amountOfLoops;
+
+
+        public Speaker() : base("tester.png",  2, 2)
         {
 
+        }
+
+        void Update()
+        {
+            if(playingAnimation == true)
+            {
+                millisecondCounter += Time.deltaTime;
+                if (millisecondCounter > 80)
+                {
+                    amountOfLoops = amountOfLoops + 1;
+                    millisecondCounter = 0;
+                    NextFrame();
+                }
+                if(amountOfLoops > 15 && currentFrame == 0)
+                {
+                    amountOfLoops = 0;
+                    playingAnimation = false;
+                }
+            }
+        }
+
+        public void PlayAnimation()
+        {
+            playingAnimation = true;
+            amountOfLoops = 0;
         }
     }
 }

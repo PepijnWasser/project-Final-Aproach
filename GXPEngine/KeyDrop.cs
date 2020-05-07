@@ -7,10 +7,13 @@ namespace GXPEngine
 {
     class KeyDrop : AnimationSprite
     {
-        int speed = 10;
+        int speed = 20;
         int column;
 
         int _rowControl;
+
+        public bool hitSpeaker;
+        public bool needToDestroy;
 
         public KeyDrop(int RowControl) : base("keyanimation.png", 4, 1)
         {
@@ -63,28 +66,30 @@ namespace GXPEngine
                 {
                     if (Input.GetKey(Key.A))
                     {
-                        this.LateDestroy();
+                        needToDestroy = true;
+                        hitSpeaker = true;
+                        Console.WriteLine(hitSpeaker);
                     }
                 }
                 if (currentFrame == 1)
                 {
                     if (Input.GetKey (Key.S))
                     {
-                        this.LateDestroy();
+                        needToDestroy = true;
                     }
                 }
                 if (currentFrame == 2)
                 {
                     if (Input.GetKey(Key.D))
                     {
-                        this.LateDestroy();
+                        needToDestroy = true;
                     }
                 }
                 if (currentFrame == 3)
                 {
                     if (Input.GetKey(Key.F))
                     {
-                        this.LateDestroy();
+                        needToDestroy = true;
                     }
                 }
             }
@@ -100,7 +105,7 @@ namespace GXPEngine
             MyGame myGame = (MyGame)game;
             if (this.y > myGame.height)
             {
-                this.LateDestroy();
+                needToDestroy = true;
             }
         }
     }
