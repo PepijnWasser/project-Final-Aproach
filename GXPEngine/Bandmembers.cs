@@ -7,11 +7,20 @@ namespace GXPEngine
 {
     class Bandmembers : Canvas
     {
-        Drummer _drummer = new Drummer();
+        Drummer _drummer;
+        Level _level;
+        public float _satisfaction;
 
-        public Bandmembers() : base(1920, 1080)
+        public Bandmembers(Level level) : base(1920, 1080)
         {
+            _drummer = new Drummer(this);
             AddChild(_drummer);
+            _level = level;
+        }
+
+        void Update()
+        {
+            _satisfaction = _level.GetSatisfaction();
         }
     }
 }

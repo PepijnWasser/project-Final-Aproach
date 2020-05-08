@@ -20,7 +20,7 @@ namespace GXPEngine
         Speaker _speaker = new Speaker();
         Light _light = new Light();
 
-        Bandmembers _bandmembers = new Bandmembers();
+        Bandmembers _bandmembers;
 
         SatisfactionBar _satisfactionBar = new SatisfactionBar();
 
@@ -28,6 +28,8 @@ namespace GXPEngine
         {
             _music = new Sound("music.wav", true, false);
             _musicChannel = _music.Play();
+
+            _bandmembers = new Bandmembers(this);
 
             AddChild(space);
             AddChild(keyDropControl);
@@ -83,6 +85,10 @@ namespace GXPEngine
             }
         }  
 
+        public float GetSatisfaction()
+        {
+            return _satisfactionBar.scaling;
+        }
 
         public bool ChangeScreen()
         {

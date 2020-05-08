@@ -8,25 +8,55 @@ namespace GXPEngine
     class Drummer : AnimationSprite
     {
         int milliscondCounter;
+        float _satisfaction;
 
-        public Drummer() : base("drummer.png", 5, 4)
+        Bandmembers _bandmembers;
+
+        public Drummer(Bandmembers bandmembers) : base("drummer.png", 9, 10)
         {
+            _bandmembers = bandmembers;
             SetXY(80, 0);
         }
 
         void Update()
         {
+            _satisfaction = _bandmembers._satisfaction;
             milliscondCounter = milliscondCounter + Time.deltaTime;
             if(milliscondCounter > 70)
             {
-                if(currentFrame < 17)
+                if (_satisfaction < 40 && _satisfaction > 10)
                 {
-                    NextFrame();
+                    if (currentFrame < 56)
+                    {
+                        NextFrame();
+                    }
+                    else
+                    {
+                        SetFrame(40);
+                    }
+                }
+                else if (_satisfaction <= 10)
+                {
+                    if (currentFrame < 88)
+                    {
+                        NextFrame();
+                    }
+                    else
+                    {
+                        SetFrame(58);
+                    }
                 }
                 else
                 {
-                    SetFrame(0);
-                }
+                    if (currentFrame < 34)
+                    {
+                        NextFrame();
+                    }
+                    else
+                    {
+                        SetFrame(0);
+                    }
+                }        
                 milliscondCounter = 0;
             }        
         }
