@@ -54,7 +54,7 @@ namespace GXPEngine
                     }
                     else
                     {
-                        SetFrame(0);
+                        SetFrame(1);
                     }
                 }        
                 milliscondCounter = 0;

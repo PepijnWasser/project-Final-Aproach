@@ -5,58 +5,42 @@ using System.Text;
 
 namespace GXPEngine
 {
-    class SmokeMachine : AnimationSprite
+    class Flame : AnimationSprite
     {
         int millisecondCounter;
-        bool playAnimation = true;
         int amountOfCycles;
-
+        bool playAnimation = true;
         Level _level;
 
-        public SmokeMachine(Level level, int x, int y) : base("smokemachine.png", 3, 4)
+        public Flame(Level level, int x, int y) : base("fire.png", 2, 3)
         {
-            SetXY(x, y);
+            this.SetXY(x, y);
             _level = level;
         }
 
         void Update()
         {
-            if(playAnimation == true)
+            if (playAnimation == true)
             {
                 millisecondCounter = millisecondCounter + Time.deltaTime;
-                if (millisecondCounter > 70)
+                if (millisecondCounter > 50)
                 {
                     millisecondCounter = 0;
                     amountOfCycles = amountOfCycles + 1;
-
-                    if (amountOfCycles < 30)
+                    if(amountOfCycles < 30)
                     {
-                        if(_level.GetSatisfaction() <= 10)
+                        if (currentFrame < 4)
                         {
-                            if(currentFrame < 8)
-                            {
-                                NextFrame();
-                            }
-                            else
-                            {
-                                SetFrame(7);
-                            }
+                            NextFrame();
                         }
                         else
                         {
-                            if (currentFrame < 6)
-                            {
-                                NextFrame();
-                            }
-                            else
-                            {
-                                SetFrame(0);
-                            }
-                        }                    
+                            SetFrame(3);
+                        }
                     }
-                    else
+                    else 
                     {
-                        if (currentFrame > 0)
+                        if(currentFrame > 0)
                         {
                             SetFrame(currentFrame - 1);
                         }
@@ -65,10 +49,11 @@ namespace GXPEngine
                             playAnimation = false;
                             amountOfCycles = 0;
                         }
+                       
                     }
-                   
                 }
-            }                
+            }
+           
         }
 
         public void PlayAnimation()

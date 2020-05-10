@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace GXPEngine
@@ -15,6 +16,7 @@ namespace GXPEngine
         bool removeScore;
         int removeScoreCycles;
         bool addScore;
+        float amountToAdd;
         bool lowGain;
 
         public SatisfactionBar() : base("satisfactionBar.png")
@@ -30,7 +32,6 @@ namespace GXPEngine
             RemoveScore();
             MakeLifelyFeeling();
             UpdateBar();
-            Console.WriteLine(lowGain);
         }
 
         void AddScore()
@@ -39,12 +40,11 @@ namespace GXPEngine
             {
                 if (lowGain == false)
                 {
-                    scaling = scaling + 0.5f;
+                    scaling = scaling + amountToAdd / 10;
                 }
                 else
                 {
-
-                    scaling = scaling + 0.1f;
+                    scaling = scaling + amountToAdd / 50;
                 }
                 addScore = false;
             }
@@ -86,7 +86,7 @@ namespace GXPEngine
             millisecondCounter = millisecondCounter + Time.deltaTime;
             if (millisecondCounter > 50)
             {
-                scaling = scaling + Utils.Random(-0.1f, 0.1f);
+                scaling = scaling + Utils.Random(-0.05f, 0.05f);
                 millisecondCounter = 0;
             }
         }
@@ -97,9 +97,10 @@ namespace GXPEngine
             this.SetScaleXY(showedScaling, 1);
         }
 
-        public void SetAddScore()
+        public void SetAddScore(float amount)
         {
             addScore = true;
+            amountToAdd = amount;
         }
 
         public void SetRemoveScore()

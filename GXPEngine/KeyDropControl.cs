@@ -20,7 +20,10 @@ namespace GXPEngine
 
         public bool hitSpeaker;
         public bool hitLight;
+        public bool hitFlame;
         public bool failed;
+        public bool switched;
+        public bool hitSmoke;
 
         public int GetNumberOfKeyDrops()
         {
@@ -72,6 +75,7 @@ namespace GXPEngine
             }
             TestHits();
             DeleteKeyDrops();
+            TestLaneSwitch();
         }
 
         void SetKeyProperties()
@@ -99,10 +103,21 @@ namespace GXPEngine
         void TestHits()
         {
             int numberOfSpeakerFails = 0;
+            int numberOfFireFails = 0;
             int numberOfLightFails = 0;
             int numberOfSucceeds = 0;
+            int numberOfSmokeFails = 0;
+
             for (int j = 0; j < _keyDrops.Count; j++)
             {
+                if (_keyDrops[j].hitSmoke)
+                {
+                    hitSmoke = true;
+                }
+                else
+                {
+                    numberOfSmokeFails = numberOfSmokeFails + 1;
+                }
                 if (_keyDrops[j].failed)
                 {
                     failed = true;
@@ -119,6 +134,14 @@ namespace GXPEngine
                 {
                     numberOfSpeakerFails = numberOfSpeakerFails + 1;               
                 }
+                if (_keyDrops[j].hitFlame)
+                {
+                    hitFlame = true;
+                }
+                else
+                {
+                    numberOfFireFails = numberOfFireFails + 1;
+                }
                 if (_keyDrops[j].hitLight)
                 {
                     hitLight = true;
@@ -132,6 +155,10 @@ namespace GXPEngine
             {
                 hitSpeaker = false;
             }
+            if (numberOfSmokeFails == _keyDrops.Count)
+            {
+                hitSmoke = false;
+            }
             if (numberOfSucceeds == _keyDrops.Count)
             {
                 failed = false;
@@ -139,6 +166,10 @@ namespace GXPEngine
             if (numberOfLightFails == _keyDrops.Count)
             {
                 hitLight = false;
+            }
+            if (numberOfFireFails == _keyDrops.Count)
+            {
+                hitFlame = false;
             }
         }
 
@@ -152,6 +183,18 @@ namespace GXPEngine
                     _keyDrops[i] = null;
                     _keyDrops.Remove(_keyDrops[i]);
                 }
+            }
+        }
+
+        void TestLaneSwitch()
+        {
+            if (_keyDropRowController.switched)
+            {
+                switched = true;
+            }
+            else
+            {
+                switched = false;
             }
         }
 

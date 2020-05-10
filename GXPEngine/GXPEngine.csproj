@@ -38,6 +38,9 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="Bandmembers.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Flame.cs" />
+    <Compile Include="Music.cs" />
     <Compile Include="satisfactionBar.cs" />
     <Compile Include="Drummer.cs" />
     <Compile Include="Lights.cs" />

@@ -12,9 +12,9 @@ namespace GXPEngine
         int amountOfLoops;
 
 
-        public Speaker() : base("tester.png",  2, 2)
+        public Speaker(int x, int y) : base("tester.png",  2, 2)
         {
-
+            this.SetXY(x, y);
         }
 
         void Update()

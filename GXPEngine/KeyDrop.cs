@@ -14,6 +14,8 @@ namespace GXPEngine
 
         public bool hitSpeaker;
         public bool hitLight;
+        public bool hitSmoke;
+        public bool hitFlame;
         public bool needToDestroy;
         public bool failed;
 
@@ -79,7 +81,7 @@ namespace GXPEngine
                 {
                     if (Input.GetKey (Key.S))
                     {
-
+                        hitFlame = true;
                     }
                     else
                     {
@@ -101,7 +103,7 @@ namespace GXPEngine
                 {
                     if (Input.GetKey(Key.F))
                     {
-
+                        hitSmoke = true;
                     }
                     else
                     {

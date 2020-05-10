@@ -8,6 +8,7 @@ namespace GXPEngine
     class KeyDropRowController : Sprite
     {
         public int row = 1;
+        public bool switched;
 
         public KeyDropRowController() : base("square.png")
         {
@@ -16,6 +17,7 @@ namespace GXPEngine
 
         void Update()
         {
+            switched = false;
             CheckRow();
             UpdateRow();
         }
@@ -25,10 +27,12 @@ namespace GXPEngine
             if (Input.GetKeyDown(Key.Q))
             {
                 row = row - 1;
+                switched = true;
             }
             if (Input.GetKeyDown(Key.E))
             {
                 row = row + 1;
+                switched = true;
             }
 
             if(row > 4)
