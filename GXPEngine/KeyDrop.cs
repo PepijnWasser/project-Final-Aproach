@@ -19,7 +19,7 @@ namespace GXPEngine
         public bool needToDestroy;
         public bool failed;
 
-        public KeyDrop(int RowControl) : base("keyanimation.png", 4, 1)
+        public KeyDrop(int RowControl) : base("keyanimation.png", 3, 3)
         {
             _rowControl = RowControl;
             SetPosition();
@@ -31,25 +31,22 @@ namespace GXPEngine
 
             if (column == 1)
             {
-                this.SetXY(1250, 0);
+                this.SetXY(400, 0);
             }
             if (column == 2)
             {
-                this.SetXY(1325, 0);
-                NextFrame();
+                this.SetXY(500, 0);
+                SetFrame(2);
             }
             if (column == 3)
             {
-                this.SetXY(1400, 0);
-                NextFrame();
-                NextFrame();
+                this.SetXY(600, 0);
+                SetFrame(4);
             }
             if (column == 4)
             {
-                this.SetXY(1475, 0);
-                NextFrame();
-                NextFrame();
-                NextFrame();
+                this.SetXY(700, 0);
+                SetFrame(6);
             }
         }
 
@@ -77,7 +74,7 @@ namespace GXPEngine
                         failed = true;
                     }
                 }
-                if (currentFrame == 1)
+                if (currentFrame == 2)
                 {
                     if (Input.GetKey (Key.S))
                     {
@@ -88,7 +85,7 @@ namespace GXPEngine
                         failed = true;
                     }
                 }
-                if (currentFrame == 2)
+                if (currentFrame == 4)
                 {
                     if (Input.GetKey(Key.D))
                     {
@@ -99,7 +96,7 @@ namespace GXPEngine
                         failed = true;
                     }
                 }
-                if (currentFrame == 3)
+                if (currentFrame == 6)
                 {
                     if (Input.GetKey(Key.F))
                     {

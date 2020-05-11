@@ -9,7 +9,7 @@ namespace GXPEngine
     {
         int millisecondCounter;
 
-        public Background() : base("background.png", 2, 2)
+        public Background() : base("background.png", 4, 1)
         {
            
         }

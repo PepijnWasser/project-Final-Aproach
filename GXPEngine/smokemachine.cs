@@ -13,10 +13,14 @@ namespace GXPEngine
 
         Level _level;
 
-        public SmokeMachine(Level level, int x, int y) : base("smokemachine.png", 3, 4)
+        public SmokeMachine(Level level, int x, int y, bool mirrored = false) : base("smokemachine.png", 3, 4)
         {
             SetXY(x, y);
             _level = level;
+            if (mirrored)
+            {
+                SetScaleXY(-1, 1);
+            }
         }
 
         void Update()

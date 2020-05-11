@@ -75,6 +75,7 @@ namespace GXPEngine
                 if (_keyDrops[j].hitSmoke)
                 {
                     hitSmoke = true;
+                    Console.WriteLine("test1");
                 }
                 else
                 {
@@ -153,9 +154,12 @@ namespace GXPEngine
             if(numberOfSpawns < _row.Length)
             {
                 Int32.TryParse(_row[numberOfSpawns], out int TempRow);
-                KeyDrop _keyDrop = new KeyDrop(TempRow);
-                AddChild(_keyDrop);
-                _keyDrops.Add(_keyDrop);
+                if(TempRow != 0)
+                {
+                    KeyDrop _keyDrop = new KeyDrop(TempRow);
+                    AddChild(_keyDrop);
+                    _keyDrops.Add(_keyDrop);
+                }
             }          
         }
 

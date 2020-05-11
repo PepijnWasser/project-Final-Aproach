@@ -32,7 +32,7 @@ namespace GXPEngine
 
         Music _music = new Music();
 
-        public Level() : base(600, 1080, false)
+        public Level() : base(960, 720, false)
         {
             _bandmembers = new Bandmembers(this);
 
@@ -56,9 +56,9 @@ namespace GXPEngine
 
         void AddSpeakers()
         {
-            _speaker = new Speaker(200, 200);
+            _speaker = new Speaker(33, 373);
             _speakers.Add(_speaker);
-            _speaker = new Speaker(500, 500);
+            _speaker = new Speaker(575, 373);
             _speakers.Add(_speaker);
 
             for(int i = 0; i < _speakers.Count; i++)
@@ -68,9 +68,9 @@ namespace GXPEngine
         }
         void AddLights()
         {
-            _light = new Light(this, 100, 100);
+            _light = new Light(this, 137, 110);
             _lights.Add(_light);
-            _light = new Light(this, 400, 400);
+            _light = new Light(this, 471, 110);
             _lights.Add(_light);
 
             for (int i = 0; i < _lights.Count; i++)
@@ -80,9 +80,9 @@ namespace GXPEngine
         }
         void AddSmokeMachines()
         {
-            _smokemachine = new SmokeMachine(this, 700, 100);
+            _smokemachine = new SmokeMachine(this, 485, 362, true);
             _smokeMachines.Add(_smokemachine);
-            _smokemachine = new SmokeMachine(this, 600, 700);
+            _smokemachine = new SmokeMachine(this, 250, 362, false);
             _smokeMachines.Add(_smokemachine);
 
             for (int i = 0; i < _smokeMachines.Count; i++)
@@ -93,9 +93,13 @@ namespace GXPEngine
 
         void AddFlames()
         {
-            _flame = new Flame(this, 100, 100);
+            _flame = new Flame(this, 581, 272);
             _flames.Add(_flame);
-            _flame = new Flame(this, 400, 400);
+            _flame = new Flame(this, 37, 272);
+            _flames.Add(_flame);
+            _flame = new Flame(this, 250, 299);
+            _flames.Add(_flame);
+            _flame = new Flame(this, 380, 299);
             _flames.Add(_flame);
 
             for (int i = 0; i < _flames.Count; i++)

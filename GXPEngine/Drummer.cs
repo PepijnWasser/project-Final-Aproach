@@ -15,7 +15,7 @@ namespace GXPEngine
         public Drummer(Bandmembers bandmembers) : base("drummer.png", 9, 10)
         {
             _bandmembers = bandmembers;
-            SetXY(80, 0);
+            SetXY(308, 307);
         }
 
         void Update()

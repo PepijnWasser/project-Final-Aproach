@@ -14,18 +14,18 @@ namespace GXPEngine
         public Guitarist2(Bandmembers bandmembers) : base("guitarist 2.png", 8, 8)
         {
             _bandmembers = bandmembers;
-            SetXY(200, 100);
+            SetXY(500, 250);
         }
 
         void Update()
         {
             _satisfaction = _bandmembers._satisfaction;
             millisecondCounter = millisecondCounter + Time.deltaTime;
-            if (millisecondCounter > 50)
+            if (millisecondCounter > 70)
             {
                 if (_satisfaction < 40 && _satisfaction > 10)
                 {
-                    if (currentFrame < 39)
+                    if (currentFrame < 36)
                     {
                         NextFrame();
                     }

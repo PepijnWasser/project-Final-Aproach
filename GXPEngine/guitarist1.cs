@@ -14,7 +14,7 @@ namespace GXPEngine
         public Guitarist1(Bandmembers bandmembers) : base("guitarist 1.png", 7, 7)
         {
             _bandmembers = bandmembers;
-            SetXY(100, 0);
+            SetXY(60, 260);
         }
 
         void Update()
