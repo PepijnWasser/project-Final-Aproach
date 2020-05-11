@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Globalization;
 
 namespace GXPEngine
 {
     class KeyDropControl : Canvas
     {
         List<KeyDrop> _keyDrops;
-        KeyDropRowController _keyDropRowController;
 
         int millisecondCounter;
-        int timeToNextKey;
-        int KeyStreak;
-        int streakCount;
-
-        int KeyDropPosition = 1;
 
         public bool hitSpeaker;
         public bool hitLight;
         public bool hitFlame;
         public bool failed;
-        public bool switched;
         public bool hitSmoke;
+
+        string[] _hits;
+        string _rows = "";
+        string[] _row;
+
+        int numberOfSpawns;
 
         public int GetNumberOfKeyDrops()
         {
@@ -43,63 +44,24 @@ namespace GXPEngine
         public KeyDropControl() : base (1920, 1080)
         {
             _keyDrops = new List<KeyDrop>();
-            _keyDropRowController = new KeyDropRowController();
-            AddChild(_keyDropRowController);
+            InitializeSpawnFile();
         }
 
         void Update()
         {
             millisecondCounter += Time.deltaTime;
-
-            if (KeyStreak == 1)
+         
+            if(millisecondCounter > 500)
             {
-                if (millisecondCounter > timeToNextKey)
-                {
-                    AddKeyDrop();
-
-                    millisecondCounter = 0;
-                    streakCount = streakCount + 1;
-
-                    if (streakCount > 10)
-                    {
-                        streakCount = 0;
-                        SetKeyProperties();
-                    }
-                }
+                AddKeyDrop();
+                millisecondCounter = 0;
+                numberOfSpawns = numberOfSpawns + 1;
             }
-            else if (millisecondCounter > timeToNextKey)
-            {
-                 AddKeyDrop();
-                 SetKeyProperties();
-                 millisecondCounter = 0;
-            }
+
             TestHits();
             DeleteKeyDrops();
-            TestLaneSwitch();
         }
-
-        void SetKeyProperties()
-        {
-            KeyStreak = Utils.Random(1, 8);
-            if(KeyStreak == 1)
-            {
-                timeToNextKey = 50;
-            }
-            else
-            {
-                timeToNextKey = 250 + Utils.Random(0, 500);
-            }
-            KeyDropPosition = Utils.Random(_keyDropRowController.row - 1, _keyDropRowController.row + 2);
-            if(KeyDropPosition < 1)
-            {
-                KeyDropPosition = 4;
-            }
-            if (KeyDropPosition > 4)
-            {
-                KeyDropPosition = 1;
-            }
-        }
-
+          
         void TestHits()
         {
             int numberOfSpeakerFails = 0;
@@ -186,31 +148,55 @@ namespace GXPEngine
             }
         }
 
-        void TestLaneSwitch()
-        {
-            if (_keyDropRowController.switched)
-            {
-                switched = true;
-            }
-            else
-            {
-                switched = false;
-            }
-        }
-
         void AddKeyDrop()
         {
-            KeyDrop _keyDrop = new KeyDrop(KeyDropPosition);
-            AddChild(_keyDrop);
-            _keyDrops.Add(_keyDrop);
+            if(numberOfSpawns < _row.Length)
+            {
+                Int32.TryParse(_row[numberOfSpawns], out int TempRow);
+                KeyDrop _keyDrop = new KeyDrop(TempRow);
+                AddChild(_keyDrop);
+                _keyDrops.Add(_keyDrop);
+            }          
         }
 
-        public int GetKeyDropPosition()
+
+        void InitializeSpawnFile()
         {
-            return KeyDropPosition;
+            string[] lines = File.ReadAllLines(@"C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project-Final-Aproach-master\GXPEngine\bin\Debug\hits.txt");
+            int numberOfRowsGiven = 0;
+            int numberOfRowsChecked = 0;
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                _hits = lines[i].Split(' ');
+                for (int j = 0; j < _hits.Length; j++)
+                {
+                    numberOfRowsGiven = numberOfRowsGiven + 1;
+                }
+            }
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                _hits = lines[i].Split(' ');               
+                for (int j = 0; j < _hits.Length; j++)
+                {
+                     if (_hits.Length >= 1 && int.TryParse(_hits[j], out int row))
+                     {
+                        numberOfRowsChecked = numberOfRowsChecked + 1;
+                        if(numberOfRowsChecked < numberOfRowsGiven)
+                        {
+                            _rows = _rows.Insert(_rows.Length, row.ToString() + ",");
+                        }
+                        else
+                        {
+                            _rows = _rows.Insert(_rows.Length, row.ToString());
+                        }
+                        
+                     }
+                    
+                }
+            }
+            _row = _rows.Split(',');
         }
-
     }
-
- 
 }

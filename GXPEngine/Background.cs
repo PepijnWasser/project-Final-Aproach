@@ -7,16 +7,22 @@ namespace GXPEngine
 {
     class Background :AnimationSprite
     {
-        public Background() : base("background.png", 4, 1)
+        int millisecondCounter;
+
+        public Background() : base("background.png", 2, 2)
         {
-            this.SetXY(50, -15);
-            this.SetScaleXY((float)1.9, (float)1.9);
+           
         }
 
-        //changes background color
-        public void UpdateFrame()
+        void Update()
         {
+            millisecondCounter = millisecondCounter + Time.deltaTime;
+
+            if(millisecondCounter > 100)
+            {
                 NextFrame();
+                millisecondCounter = 0;
+            }
         }
     }
 }

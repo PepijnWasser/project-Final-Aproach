@@ -107,7 +107,6 @@ namespace GXPEngine
 
         void Update()
         {
-            BackgroundControl();
             TestAnimatables();
             TestScoring();
         }
@@ -121,11 +120,6 @@ namespace GXPEngine
             else if(keyDropControl.hitSpeaker == true || keyDropControl.hitLight == true)
             {
                 _satisfactionBar.SetAddScore(5);
-            }
-
-            if(keyDropControl.switched == true)
-            {
-                _satisfactionBar.SetAddScore(15);
             }
         }
 
@@ -160,21 +154,6 @@ namespace GXPEngine
                 }
             }
         }
-
-        void BackgroundControl()
-        {
-            _levelMillisecondCounter += Time.deltaTime;
-            if (_levelMillisecondCounter >= 1000)
-            {
-                _levelMillisecondCounter = 0;
-                _levelSecondCounter = _levelSecondCounter + 1;
-            }
-            if (_levelSecondCounter == 60)
-            {
-                space.UpdateFrame();
-                _levelSecondCounter = 0;
-            }
-        }  
 
         public float GetSatisfaction()
         {
