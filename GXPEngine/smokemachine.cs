@@ -36,7 +36,7 @@ namespace GXPEngine
 
                     if (amountOfCycles < 30)
                     {
-                        if(_level.GetSatisfaction() <= 10)
+                        if(_level.GetSatisfaction() <= 2)
                         {
                             if(currentFrame < 8)
                             {

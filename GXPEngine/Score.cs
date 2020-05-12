@@ -9,7 +9,7 @@ namespace GXPEngine
     class Score : Canvas
     {
         Level _level;
-        int _score;
+        int _score = 99;
 
         Font f = new Font(new FontFamily("Verdana"), 60);
 
@@ -21,7 +21,23 @@ namespace GXPEngine
         void Update()
         {
             graphics.Clear(Color.Empty);
-            graphics.DrawString(_score.ToString(), f, Brushes.White, 320, 220);
+            if(_score < 10)
+            {
+                graphics.DrawString(_score.ToString(), f, Brushes.White, 320, 220);
+            }
+            else if(_score < 100)
+            {
+                graphics.DrawString(_score.ToString(), f, Brushes.White, 310, 220);
+            }
+            else if(_score < 1000)
+            {
+                graphics.DrawString(_score.ToString(), f, Brushes.White, 280, 220);
+            }
+            else
+            {
+                graphics.DrawString(_score.ToString(), f, Brushes.White, 250, 220);
+            }
+           
         }
 
         public void AddScore()

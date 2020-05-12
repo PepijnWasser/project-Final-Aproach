@@ -7,7 +7,7 @@ namespace GXPEngine
 {
     class KeyDrop : AnimationSprite
     {
-        int speed = 10;
+        int speed = 5;
         int column;
 
         int _rowControl;
@@ -32,21 +32,21 @@ namespace GXPEngine
 
             if (column == 1)
             {
-                this.SetXY(400, 0);
+                this.SetXY(732, 0);
             }
             if (column == 2)
             {
-                this.SetXY(500, 0);
+                this.SetXY(795, 0);
                 SetFrame(2);
             }
             if (column == 3)
             {
-                this.SetXY(600, 0);
+                this.SetXY(855, 0);
                 SetFrame(4);
             }
             if (column == 4)
             {
-                this.SetXY(700, 0);
+                this.SetXY(915, 0);
                 SetFrame(6);
             }
         }

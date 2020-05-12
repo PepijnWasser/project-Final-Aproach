@@ -29,25 +29,35 @@ namespace GXPEngine
 
         SatisfactionBar _satisfactionBar = new SatisfactionBar();
 
+        SideBar _sideBar = new SideBar();
+
         LevelMusic _music = new LevelMusic();
+
+        SatisfactionCase _satisfactionCase = new SatisfactionCase();
+
+        Crowd _crowd;
 
         public Level() : base(960, 720, false)
         {
             _bandmembers = new Bandmembers(this);
             _score = new Score(this);
             keyDropControl = new KeyDropControl(this);
+            _crowd = new Crowd(this);
 
             _speakers = new List<Speaker>();
             _flames = new List<Flame>();
             _lights = new List<Light>();
             _smokeMachines = new List<SmokeMachine>();
 
-            AddChild(space);
-            AddChild(keyDropControl);           
+            AddChild(space);        
             AddChild(_bandmembers);
             AddChild(_satisfactionBar);
             AddChild(_music);
             AddChild(_score);
+            AddChild(_crowd);
+            AddChild(_sideBar);
+            AddChild(_satisfactionCase);
+            AddChild(keyDropControl);
 
             AddSpeakers();
             AddLights();

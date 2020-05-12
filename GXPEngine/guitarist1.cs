@@ -24,7 +24,7 @@ namespace GXPEngine
             millisecondCounter = millisecondCounter + Time.deltaTime;
             if (millisecondCounter > 70)
             {
-                if (_satisfaction < 40 && _satisfaction > 10)
+                if (_satisfaction < 22 && _satisfaction > 2)
                 {
                     if (currentFrame < 12)
                     {
@@ -35,7 +35,7 @@ namespace GXPEngine
                         SetFrame(0);
                     }
                 }
-                else if (_satisfaction <= 10)
+                else if (_satisfaction <= 2)
                 {
                     if (currentFrame < 88)
                     {

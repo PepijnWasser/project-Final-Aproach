@@ -33,7 +33,7 @@ namespace GXPEngine
                 millesecondCounter = millesecondCounter + Time.deltaTime;
                 if (millesecondCounter > 70)
                 {
-                    if(satisfaction <= 10)
+                    if(satisfaction <= 2)
                     {
                         if(currentFrame < 7)
                         {

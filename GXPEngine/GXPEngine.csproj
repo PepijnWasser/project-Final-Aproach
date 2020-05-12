@@ -38,6 +38,9 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="Bandmembers.cs" />
+    <Compile Include="SatisfactionCase.cs" />
+    <Compile Include="SideBar.cs" />
+    <Compile Include="Crowd.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="MenuMusic.cs" />
     <Compile Include="Guitarist 2.cs" />

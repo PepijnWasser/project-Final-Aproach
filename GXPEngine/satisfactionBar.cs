@@ -8,7 +8,7 @@ namespace GXPEngine
 {
     class SatisfactionBar : Sprite
     {
-        public float scaling = 0;
+        public float scaling = 200;
         float showedScaling;
         int millisecondCounter;
         int millisecondCounter2;
@@ -22,7 +22,7 @@ namespace GXPEngine
         public SatisfactionBar() : base("satisfactionBar.png")
         {
             MyGame myGame = (MyGame)game;
-            this.SetXY(0, 10);
+            this.SetXY(0, 20);
         }
 
         void Update()
@@ -42,14 +42,14 @@ namespace GXPEngine
             {
                 if (lowGain == false)
                 {
-                    scaling = scaling + amountToAdd / 10;
+                    scaling = scaling + amountToAdd / 20;
                 }
                 else
                 {
-                    scaling = scaling + amountToAdd / 50;
+                    scaling = scaling + amountToAdd / 100;
                 }
                 addScore = false;
-            }
+            }        
         }
 
         // remove score and indicate a mistake was made
@@ -99,8 +99,16 @@ namespace GXPEngine
         // update the size of the bar
         void UpdateBar()
         {
+            if (scaling > 24)
+            {
+                scaling = 24;
+            }
+            if (scaling < 1)
+            {
+                scaling = 1;
+            }
             showedScaling = scaling;
-            this.SetScaleXY(showedScaling, 1);
+            this.SetScaleXY(showedScaling, 0.70f);
         }
 
         public void SetAddScore(float amount)
