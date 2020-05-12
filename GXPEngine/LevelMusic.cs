@@ -41,24 +41,25 @@ namespace GXPEngine
             if(_musicToPlay == 1)
             {
                 _music = new Sound("pressure.wav", false, false);
-                bpm = 1000 / (136 / 60) * 2;
+                bpm = 1000 / ((136f / 60f) / 2f);
             }
             if(_musicToPlay == 2)
             {
                 _music = new Sound("Thought Contagion.wav", false, false);
-                bpm = 1000 / (140 / 60);
+                bpm = 1000 / (140f / 60f);
             }
             if(_musicToPlay == 3)
             {
                 _music = new Sound("plug.wav", false, false);
-                bpm = 1000 / (136 / 60);
+                bpm = 1000 / (136f / 60f);
             }
             if(_musicToPlay == 4)
             {
                 _music = new Sound("Butterflies and Hurricanes.wav", false, false);
-                bpm = 1000 / (115 / 60);
+                bpm = 1000 / (115f / 60f);
             }
-            _musicToPlay = _musicToPlay + 1; 
+            _musicToPlay = _musicToPlay + 1;
+            Console.WriteLine(bpm);
         }
 
         // stop the music

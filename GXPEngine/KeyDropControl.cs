@@ -81,6 +81,7 @@ namespace GXPEngine
             {
                 Console.WriteLine("hitLight");
             }
+            Console.WriteLine(_keyDrops.Count);
 
         }
 
