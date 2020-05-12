@@ -5,11 +5,11 @@ using System.Text;
 
 namespace GXPEngine
 {
-    class MenuMusic : Canvas
+    class LevelMusic : Canvas
     {
         SoundChannel _musicChannel;
         Sound _music;
-        public MenuMusic() : base(1920, 1080)
+        public LevelMusic() : base(1920, 1080)
         {
             NewMusic();
             _musicChannel = _music.Play();
@@ -17,7 +17,7 @@ namespace GXPEngine
 
         void Update()
         {
-            if (_musicChannel.IsPlaying == false)
+            if(_musicChannel.IsPlaying == false)
             {
                 _musicChannel.Stop();
 
@@ -29,7 +29,7 @@ namespace GXPEngine
 
         public void NewMusic()
         {
-            _music = new Sound("algorithm.wav", false, false);
+                _music = new Sound("risk.wav", false, false);           
         }
 
         public void StopMusic()

@@ -51,7 +51,7 @@ namespace GXPEngine
         {
             millisecondCounter += Time.deltaTime;
          
-            if(millisecondCounter > 500)
+            if(millisecondCounter > 882)
             {
                 AddKeyDrop();
                 millisecondCounter = 0;
@@ -75,7 +75,6 @@ namespace GXPEngine
                 if (_keyDrops[j].hitSmoke)
                 {
                     hitSmoke = true;
-                    Console.WriteLine("test1");
                 }
                 else
                 {
@@ -151,22 +150,66 @@ namespace GXPEngine
 
         void AddKeyDrop()
         {
-            if(numberOfSpawns < _row.Length)
+            var _rowsToSpawnIn = new List<int>(); 
+            bool check = false;
+
+
+            Int32.TryParse(_row[numberOfSpawns], out int TempRows);
+            _rowsToSpawnIn.Add(TempRows);
+
+            while (check == false)
             {
-                Int32.TryParse(_row[numberOfSpawns], out int TempRow);
-                if(TempRow != 0)
+                int checks = 0;
+
+                var _rowsToRemove = new List<int>();
+                var _rowsToAdd = new List<int>();
+                foreach (int _row in _rowsToSpawnIn)
                 {
-                    KeyDrop _keyDrop = new KeyDrop(TempRow);
+                    if (_row > 9)
+                    {
+                        _rowsToRemove.Add(_row);
+                        _rowsToAdd.Add(_row / 10);
+                        _rowsToAdd.Add(_row % 10);
+                    }
+                    else
+                    {
+                        checks = checks + 1;
+                    }
+                }
+                foreach(int _row in _rowsToRemove)
+                {
+                    _rowsToSpawnIn.Remove(_row);
+                }
+
+                foreach(int _row in _rowsToAdd)
+                {
+                    _rowsToSpawnIn.Add(_row);
+                }
+
+                if (checks == _rowsToSpawnIn.Count)
+                {
+                    check = true;
+                }
+            }
+
+            foreach (int _finalRow in _rowsToSpawnIn)
+            {
+                if (_finalRow != 0)
+                {
+                    KeyDrop _keyDrop = new KeyDrop(_finalRow);
                     AddChild(_keyDrop);
                     _keyDrops.Add(_keyDrop);
                 }
-            }          
+            }
+               
+                    
         }
 
 
         void InitializeSpawnFile()
         {
-            string[] lines = File.ReadAllLines(@"C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project-Final-Aproach-master\GXPEngine\bin\Debug\hits.txt");
+            string path = Path.GetDirectoryName("hits.txt");
+            string[] lines = File.ReadAllLines(path + "hits.txt");
             int numberOfRowsGiven = 0;
             int numberOfRowsChecked = 0;
 

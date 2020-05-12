@@ -8,9 +8,6 @@ namespace GXPEngine
 {
     public class Level : Canvas
     {
-        int _levelMillisecondCounter;
-        int _levelSecondCounter;
-
         Background space = new Background();
         KeyDropControl keyDropControl = new KeyDropControl();
 
@@ -30,7 +27,7 @@ namespace GXPEngine
 
         SatisfactionBar _satisfactionBar = new SatisfactionBar();
 
-        Music _music = new Music();
+        LevelMusic _music = new LevelMusic();
 
         public Level() : base(960, 720, false)
         {

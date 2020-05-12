@@ -10,6 +10,7 @@ namespace GXPEngine
         readonly string[] _playerThatGotHighScoreLine;
         readonly string _players = "";
         readonly string _scoretoCompare;
+        string path = Path.GetDirectoryName("scoreboard.txt");
 
         readonly int _top1Player;
         readonly int _top2Player;
@@ -35,7 +36,7 @@ namespace GXPEngine
 
             //needs to be updated to the score 
             _scoreGot = 4;
-            string[] lines = File.ReadAllLines(@"C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project lift off\GXPEngine\bin\Debug\scoreboard.txt");
+            string[] lines = File.ReadAllLines(path + "txt");
 
             //make an array with all scores got
             for (int i = 0; i < lines.Length; i++)

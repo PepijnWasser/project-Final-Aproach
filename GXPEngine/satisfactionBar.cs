@@ -22,7 +22,7 @@ namespace GXPEngine
         public SatisfactionBar() : base("satisfactionBar.png")
         {
             MyGame myGame = (MyGame)game;
-            this.SetXY(0, myGame.height - 100);
+            this.SetXY(0, 10);
         }
 
         void Update()

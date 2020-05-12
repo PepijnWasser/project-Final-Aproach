@@ -7,7 +7,7 @@ namespace GXPEngine
 {
     class KeyDrop : AnimationSprite
     {
-        int speed = 20;
+        int speed = 10;
         int column;
 
         int _rowControl;
@@ -65,7 +65,7 @@ namespace GXPEngine
             {
                 if(currentFrame == 0)
                 {
-                    if (Input.GetKey(Key.A))
+                    if (Input.GetKey(Key.D))
                     {
                         hitSpeaker = true;
                     }
@@ -76,7 +76,7 @@ namespace GXPEngine
                 }
                 if (currentFrame == 2)
                 {
-                    if (Input.GetKey (Key.S))
+                    if (Input.GetKey (Key.F))
                     {
                         hitFlame = true;
                     }
@@ -87,7 +87,7 @@ namespace GXPEngine
                 }
                 if (currentFrame == 4)
                 {
-                    if (Input.GetKey(Key.D))
+                    if (Input.GetKey(Key.J))
                     {
                         hitLight = true;
                     }
@@ -98,7 +98,7 @@ namespace GXPEngine
                 }
                 if (currentFrame == 6)
                 {
-                    if (Input.GetKey(Key.F))
+                    if (Input.GetKey(Key.K))
                     {
                         hitSmoke = true;
                     }
