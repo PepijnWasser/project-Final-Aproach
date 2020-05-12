@@ -9,7 +9,7 @@ namespace GXPEngine
     public class Level : Canvas
     {
         Background space = new Background();
-        KeyDropControl keyDropControl = new KeyDropControl();
+        KeyDropControl keyDropControl;
 
         List<Speaker> _speakers;
         Speaker _speaker;
@@ -32,6 +32,7 @@ namespace GXPEngine
         public Level() : base(960, 720, false)
         {
             _bandmembers = new Bandmembers(this);
+            keyDropControl = new KeyDropControl(this);
 
             _speakers = new List<Speaker>();
             _flames = new List<Flame>();
@@ -50,7 +51,9 @@ namespace GXPEngine
             AddSmokeMachines();
 
         }
-
+        ////////////////////////////////////////////////////////////////////////////
+        ///until void Update(): spawn a object and add it to a list of those objects
+        ////////////////////////////////////////////////////////////////////////////
         void AddSpeakers()
         {
             _speaker = new Speaker(33, 373);
@@ -108,22 +111,34 @@ namespace GXPEngine
 
         void Update()
         {
+            TestSong();
             TestAnimatables();
             TestScoring();
         }
 
+        //if you press M it goes to the next song
+        void TestSong()
+        {
+            if (Input.GetKeyDown(Key.M))
+            {
+                _music.NextSong();
+            }
+        }
+
+        //if you failed something remove score. if you did something right add score
         void TestScoring()
         {
-            if(keyDropControl.failed == true)
+            if (keyDropControl.failed == true)
             {
                 _satisfactionBar.SetRemoveScore();
             }
-            else if(keyDropControl.hitSpeaker == true || keyDropControl.hitLight == true)
+            else if (keyDropControl.hitSpeaker == true || keyDropControl.hitLight == true || keyDropControl.hitFlame == true || keyDropControl.hitSmoke == true)
             {
                 _satisfactionBar.SetAddScore(5);
             }
         }
 
+        //if you did something reght animate the right thing
         void TestAnimatables()
         {
             if (keyDropControl.hitFlame)
@@ -161,6 +176,10 @@ namespace GXPEngine
             return _satisfactionBar.scaling;
         }
 
+        public float GetBPM()
+        {
+            return _music.bpm;
+        }
 
         public bool ChangeScreen()
         {

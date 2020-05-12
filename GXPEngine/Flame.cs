@@ -20,6 +20,7 @@ namespace GXPEngine
 
         void Update()
         {
+            // if the animation needs to play play it every 50 milliseconds for 30 cycles
             if (playAnimation == true)
             {
                 millisecondCounter = millisecondCounter + Time.deltaTime;

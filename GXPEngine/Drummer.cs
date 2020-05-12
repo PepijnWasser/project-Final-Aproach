@@ -20,6 +20,7 @@ namespace GXPEngine
 
         void Update()
         {
+            //every 70 milliseconds go change the frame depending on satisfaction
             _satisfaction = _bandmembers._satisfaction;
             millisecondCounter = millisecondCounter + Time.deltaTime;
             if(millisecondCounter > 70)

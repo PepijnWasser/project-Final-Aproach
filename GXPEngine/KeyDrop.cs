@@ -27,6 +27,7 @@ namespace GXPEngine
 
         void SetPosition()
         {
+            //depending on the column it got from keycontrol change the position to that row
             column = _rowControl;
 
             if (column == 1)
@@ -60,6 +61,9 @@ namespace GXPEngine
 
         void TestKeyPress()
         {
+            // if the block is 200 above the bottom test if the correct button is pressed
+            //if true return the type of key
+            //if false return that it failed
             MyGame myGame = (MyGame)game;
             if (this.y > myGame.height - 200)
             {
@@ -113,11 +117,13 @@ namespace GXPEngine
 
         void Fall()
         {
+            //just falling
             this.y = this.y + speed;
         }
 
         void OutOfBounds()
         {
+            //if the block is out of the screen indicate that it needs to be deleted
             MyGame myGame = (MyGame)game;
             if (this.y > myGame.height)
             {

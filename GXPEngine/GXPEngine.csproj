@@ -38,7 +38,7 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="Bandmembers.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="MenuMusic.cs" />
     <Compile Include="Guitarist 2.cs" />
     <Compile Include="guitarist1.cs" />
     <Compile Include="smokemachine.cs" />

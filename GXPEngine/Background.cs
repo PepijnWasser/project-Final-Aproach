@@ -16,6 +16,7 @@ namespace GXPEngine
 
         void Update()
         {
+            // every 100 milliseconds update the background for the light flashing effect
             millisecondCounter = millisecondCounter + Time.deltaTime;
 
             if(millisecondCounter > 100)

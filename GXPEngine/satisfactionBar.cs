@@ -34,6 +34,8 @@ namespace GXPEngine
             UpdateBar();
         }
 
+        // if score needs to be added add it
+        //decrease the amount added when a mistake was made recently
         void AddScore()
         {
             if (addScore == true)
@@ -50,6 +52,7 @@ namespace GXPEngine
             }
         }
 
+        // remove score and indicate a mistake was made
         void RemoveScore()
         {
             if (removeScore == true)
@@ -70,7 +73,7 @@ namespace GXPEngine
             }
         }
 
-
+        //if a mistake was made set LowGain to true for 5000 milliseconds
         void LowGainTime()
         {
             millisecondCounter3 = millisecondCounter3 + Time.deltaTime;
@@ -81,6 +84,8 @@ namespace GXPEngine
             }
         }
 
+        //add random spasms to the bar
+        //overal these spasms do not add/remove anything
         void MakeLifelyFeeling()
         {
             millisecondCounter = millisecondCounter + Time.deltaTime;
@@ -91,6 +96,7 @@ namespace GXPEngine
             }
         }
 
+        // update the size of the bar
         void UpdateBar()
         {
             showedScaling = scaling;

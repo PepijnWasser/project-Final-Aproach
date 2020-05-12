@@ -26,6 +26,8 @@ namespace GXPEngine
 
         int numberOfSpawns;
 
+        Level _level;
+
         public int GetNumberOfKeyDrops()
         {
             return _keyDrops.Count;
@@ -41,17 +43,19 @@ namespace GXPEngine
         }
 
 
-        public KeyDropControl() : base (1920, 1080)
+        public KeyDropControl(Level level) : base (1920, 1080)
         {
+            _level = level;
             _keyDrops = new List<KeyDrop>();
             InitializeSpawnFile();
         }
 
         void Update()
         {
+            //if millisecondcounter is above a value spawn a new key from the list
             millisecondCounter += Time.deltaTime;
          
-            if(millisecondCounter > 882)
+            if(millisecondCounter > _level.GetBPM())
             {
                 AddKeyDrop();
                 millisecondCounter = 0;
@@ -64,6 +68,7 @@ namespace GXPEngine
           
         void TestHits()
         {
+            //test all keydrops if a key was pressed, else set it to false
             int numberOfSpeakerFails = 0;
             int numberOfFireFails = 0;
             int numberOfLightFails = 0;
@@ -137,6 +142,7 @@ namespace GXPEngine
 
         void DeleteKeyDrops()
         {
+            //test all keydrops if it needs to be deleted and delete it
             for (int i = 0; i < _keyDrops.Count; i++)
             {
                 if (_keyDrops[i].needToDestroy)
@@ -153,10 +159,13 @@ namespace GXPEngine
             var _rowsToSpawnIn = new List<int>(); 
             bool check = false;
 
-
+            //makes a integer of the current string
             Int32.TryParse(_row[numberOfSpawns], out int TempRows);
             _rowsToSpawnIn.Add(TempRows);
 
+            //checks the value of the current row
+            //if the value has double digits split them in two integers and add them to a list
+            //do this till there are no more double digits
             while (check == false)
             {
                 int checks = 0;
@@ -192,6 +201,7 @@ namespace GXPEngine
                 }
             }
 
+            //foreach digit we need to spawm spawn it
             foreach (int _finalRow in _rowsToSpawnIn)
             {
                 if (_finalRow != 0)
@@ -213,6 +223,7 @@ namespace GXPEngine
             int numberOfRowsGiven = 0;
             int numberOfRowsChecked = 0;
 
+            //reads the hits.txt file and gets the number of arrays it would make
             for (int i = 0; i < lines.Length; i++)
             {
                 _hits = lines[i].Split(' ');
@@ -222,6 +233,7 @@ namespace GXPEngine
                 }
             }
 
+            //reads the hits.txt file and makes a string of all values seperated by a , except for the last one
             for (int i = 0; i < lines.Length; i++)
             {
                 _hits = lines[i].Split(' ');               
@@ -243,6 +255,7 @@ namespace GXPEngine
                     
                 }
             }
+            //makes a array of strings all with a single value
             _row = _rows.Split(',');
         }
     }
