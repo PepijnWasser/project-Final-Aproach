@@ -8,7 +8,7 @@ namespace GXPEngine
 {
     class SatisfactionBar : Sprite
     {
-        public float scaling = 70;
+        public float scaling = 0;
         float showedScaling;
         int millisecondCounter;
         int millisecondCounter2;

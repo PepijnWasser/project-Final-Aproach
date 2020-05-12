@@ -58,7 +58,7 @@ namespace GXPEngine
                 _music = new Sound("Butterflies and Hurricanes.wav", false, false);
                 bpm = 1000 / (115 / 60);
             }
-            _musicToPlay = _musicToPlay + 1;
+            _musicToPlay = _musicToPlay + 1; 
         }
 
         // stop the music

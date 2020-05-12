@@ -27,6 +27,7 @@ namespace GXPEngine
         int numberOfSpawns;
 
         Level _level;
+        KeyDrop _testDrop;
 
         public int GetNumberOfKeyDrops()
         {
@@ -64,93 +65,88 @@ namespace GXPEngine
 
             TestHits();
             DeleteKeyDrops();
+            if (hitSpeaker)
+            {
+                Console.WriteLine("hitSpeaker");
+            }
+            if (hitFlame)
+            {
+                Console.WriteLine("hitFlame");
+            }
+            if (hitSmoke)
+            {
+                Console.WriteLine("hitSmoke");
+            }
+            if (hitLight)
+            {
+                Console.WriteLine("hitLight");
+            }
+
         }
-          
+
         void TestHits()
         {
-            //test all keydrops if a key was pressed, else set it to false
-            int numberOfSpeakerFails = 0;
-            int numberOfFireFails = 0;
-            int numberOfLightFails = 0;
-            int numberOfSucceeds = 0;
-            int numberOfSmokeFails = 0;
-
+            //test all keydrops if a key was pressed
+            ResetValues();
             for (int j = 0; j < _keyDrops.Count; j++)
             {
-                if (_keyDrops[j].hitSmoke)
+                if (_testDrop == _keyDrops[j])
                 {
-                    hitSmoke = true;
-                }
-                else
-                {
-                    numberOfSmokeFails = numberOfSmokeFails + 1;
+                    Console.WriteLine("tetettetetete");
                 }
                 if (_keyDrops[j].failed)
                 {
                     failed = true;
                 }
-                else
+                if (_keyDrops[j].hitSmoke)
                 {
-                    numberOfSucceeds = numberOfSucceeds + 1;
+                    Console.WriteLine(_keyDrops[j].needToDestroy);
+                    hitSmoke = true;
                 }
                 if (_keyDrops[j].hitSpeaker)
                 {
+                    Console.WriteLine(_keyDrops[j].needToDestroy);
                     hitSpeaker = true;
-                }
-                else
-                {
-                    numberOfSpeakerFails = numberOfSpeakerFails + 1;               
                 }
                 if (_keyDrops[j].hitFlame)
                 {
+                    Console.WriteLine(_keyDrops[j].needToDestroy);
                     hitFlame = true;
-                }
-                else
-                {
-                    numberOfFireFails = numberOfFireFails + 1;
+                    _testDrop = _keyDrops[j];
                 }
                 if (_keyDrops[j].hitLight)
                 {
+                    Console.WriteLine(_keyDrops[j].needToDestroy);
                     hitLight = true;
                 }
-                else
-                {
-                    numberOfLightFails = numberOfLightFails + 1;
-                }
             }
-            if (numberOfSpeakerFails == _keyDrops.Count)
-            {
-                hitSpeaker = false;
-            }
-            if (numberOfSmokeFails == _keyDrops.Count)
-            {
-                hitSmoke = false;
-            }
-            if (numberOfSucceeds == _keyDrops.Count)
-            {
-                failed = false;
-            }
-            if (numberOfLightFails == _keyDrops.Count)
-            {
-                hitLight = false;
-            }
-            if (numberOfFireFails == _keyDrops.Count)
-            {
-                hitFlame = false;
-            }
+        }
+        void ResetValues()
+        {
+            hitLight = false;
+            hitSmoke = false;
+            hitFlame = false;
+            hitSpeaker = false;
+            failed = false;
         }
 
         void DeleteKeyDrops()
         {
             //test all keydrops if it needs to be deleted and delete it
+            var _keydropsToDelete = new List<KeyDrop>();
+
             for (int i = 0; i < _keyDrops.Count; i++)
             {
                 if (_keyDrops[i].needToDestroy)
                 {
                     _keyDrops[i].LateDestroy();
                     _keyDrops[i] = null;
-                    _keyDrops.Remove(_keyDrops[i]);
+                    _keydropsToDelete.Add(_keyDrops[i]);
                 }
+            }
+            foreach(KeyDrop _keydrop in _keydropsToDelete)
+            {
+                _keyDrops.Remove(_keydrop);
             }
         }
 
@@ -160,59 +156,60 @@ namespace GXPEngine
             bool check = false;
 
             //makes a integer of the current string
-            Int32.TryParse(_row[numberOfSpawns], out int TempRows);
-            _rowsToSpawnIn.Add(TempRows);
-
-            //checks the value of the current row
-            //if the value has double digits split them in two integers and add them to a list
-            //do this till there are no more double digits
-            while (check == false)
+            if(numberOfSpawns < _row.Length)
             {
-                int checks = 0;
+                Int32.TryParse(_row[numberOfSpawns], out int TempRows);
+                _rowsToSpawnIn.Add(TempRows);
 
-                var _rowsToRemove = new List<int>();
-                var _rowsToAdd = new List<int>();
-                foreach (int _row in _rowsToSpawnIn)
+                //checks the value of the current row
+                //if the value has double digits split them in two integers and add them to a list
+                //do this till there are no more double digits
+                while (check == false)
                 {
-                    if (_row > 9)
+                    int checks = 0;
+
+                    var _rowsToRemove = new List<int>();
+                    var _rowsToAdd = new List<int>();
+                    foreach (int _row in _rowsToSpawnIn)
                     {
-                        _rowsToRemove.Add(_row);
-                        _rowsToAdd.Add(_row / 10);
-                        _rowsToAdd.Add(_row % 10);
+                        if (_row > 9)
+                        {
+                            _rowsToRemove.Add(_row);
+                            _rowsToAdd.Add(_row / 10);
+                            _rowsToAdd.Add(_row % 10);
+                        }
+                        else
+                        {
+                            checks = checks + 1;
+                        }
                     }
-                    else
+                    foreach (int _row in _rowsToRemove)
                     {
-                        checks = checks + 1;
+                        _rowsToSpawnIn.Remove(_row);
+                    }
+
+                    foreach (int _row in _rowsToAdd)
+                    {
+                        _rowsToSpawnIn.Add(_row);
+                    }
+
+                    if (checks == _rowsToSpawnIn.Count)
+                    {
+                        check = true;
                     }
                 }
-                foreach(int _row in _rowsToRemove)
-                {
-                    _rowsToSpawnIn.Remove(_row);
-                }
 
-                foreach(int _row in _rowsToAdd)
+                //foreach digit we need to spawm spawn it
+                foreach (int _finalRow in _rowsToSpawnIn)
                 {
-                    _rowsToSpawnIn.Add(_row);
+                    if (_finalRow != 0)
+                    {
+                        KeyDrop _keyDrop = new KeyDrop(_finalRow);
+                        AddChild(_keyDrop);
+                        _keyDrops.Add(_keyDrop);
+                    }
                 }
-
-                if (checks == _rowsToSpawnIn.Count)
-                {
-                    check = true;
-                }
-            }
-
-            //foreach digit we need to spawm spawn it
-            foreach (int _finalRow in _rowsToSpawnIn)
-            {
-                if (_finalRow != 0)
-                {
-                    KeyDrop _keyDrop = new KeyDrop(_finalRow);
-                    AddChild(_keyDrop);
-                    _keyDrops.Add(_keyDrop);
-                }
-            }
-               
-                    
+            }                               
         }
 
 

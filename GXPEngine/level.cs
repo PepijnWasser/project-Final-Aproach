@@ -19,6 +19,8 @@ namespace GXPEngine
 
         Bandmembers _bandmembers;
 
+        Score _score;
+
         List<Flame> _flames;
         Flame _flame;
 
@@ -32,6 +34,7 @@ namespace GXPEngine
         public Level() : base(960, 720, false)
         {
             _bandmembers = new Bandmembers(this);
+            _score = new Score(this);
             keyDropControl = new KeyDropControl(this);
 
             _speakers = new List<Speaker>();
@@ -44,6 +47,7 @@ namespace GXPEngine
             AddChild(_bandmembers);
             AddChild(_satisfactionBar);
             AddChild(_music);
+            AddChild(_score);
 
             AddSpeakers();
             AddLights();
@@ -131,10 +135,35 @@ namespace GXPEngine
             if (keyDropControl.failed == true)
             {
                 _satisfactionBar.SetRemoveScore();
+                
             }
-            else if (keyDropControl.hitSpeaker == true || keyDropControl.hitLight == true || keyDropControl.hitFlame == true || keyDropControl.hitSmoke == true)
+            else
             {
-                _satisfactionBar.SetAddScore(5);
+                if (keyDropControl.hitSpeaker == true)
+                {
+                    _score.AddScore();
+                    _satisfactionBar.SetAddScore(5);
+                    Console.WriteLine("1");
+                }
+                if (keyDropControl.hitSmoke == true)
+                {
+                    _score.AddScore();
+                    _satisfactionBar.SetAddScore(5);
+                    Console.WriteLine("2");
+                }
+                if (keyDropControl.hitLight == true)
+                {
+                    _score.AddScore();
+                    _satisfactionBar.SetAddScore(5);
+                    Console.WriteLine("3");
+                }
+                if (keyDropControl.hitFlame == true)
+                {
+                    _score.AddScore();
+                    _satisfactionBar.SetAddScore(5);
+                    Console.WriteLine("4");
+                }
+
             }
         }
 
