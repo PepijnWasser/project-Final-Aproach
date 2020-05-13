@@ -66,6 +66,7 @@ namespace GXPEngine
             AddChild(_bandmembers);
 
         }
+
         ////////////////////////////////////////////////////////////////////////////
         ///until void Update(): spawn a object and add it to a list of those objects
         ////////////////////////////////////////////////////////////////////////////
@@ -83,9 +84,13 @@ namespace GXPEngine
         }
         void AddLights()
         {
-            _light = new Light(this, 137, 110);
+            _light = new Light(this, 26, 112, "purple");
             _lights.Add(_light);
-            _light = new Light(this, 471, 110);
+            _light = new Light(this, 122, 112, "pink");
+            _lights.Add(_light);
+            _light = new Light(this, 488, 112, "purple");
+            _lights.Add(_light);
+            _light = new Light(this, 575, 112, "pink");
             _lights.Add(_light);
 
             for (int i = 0; i < _lights.Count; i++)

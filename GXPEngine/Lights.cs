@@ -10,78 +10,96 @@ namespace GXPEngine
         int millesecondCounter;
         bool goingRight = true;
 
-        bool playingAnimation = false;
+        bool playingAnimation = true;
         int amountOfLoops;
 
         public float satisfaction;
+        string _color;
 
         Level _level;
 
-        public Light(Level level, int x, int y) : base("light.png", 3, 3)
+        public Light(Level level, int x, int y, string color) : base("light.png", 5, 3)
         {
             SetXY(x, y);
             SetFrame(2);
             _level = level;
+            _color = color;
+            if(color == "purple")
+            {
+                SetFrame(5);
+            }
         }
 
         void Update()
         {
-            // if the animation needs to play play it every 50 milliseconds for 30 cycles
+            // if the animation needs to play play it every 70 milliseconds for 30 cycles
             satisfaction = _level.GetSatisfaction();
             if (playingAnimation == true)
             {
                 millesecondCounter = millesecondCounter + Time.deltaTime;
                 if (millesecondCounter > 70)
                 {
-                    if(satisfaction <= 2)
+                    if (satisfaction <= 2)
                     {
-                        if(currentFrame < 7)
+                        if (currentFrame < 13)
                         {
                             NextFrame();
                         }
                         else
                         {
-                            currentFrame = 5;
+                            currentFrame = 10;
                         }
                     }
                     else
                     {
                         if (goingRight == true)
                         {
-                            if (currentFrame > 0 && currentFrame < 3)
+                            if (_color == "pink")
                             {
-                                SetFrame(currentFrame - 1);
+                                if (currentFrame < 4)
+                                {
+                                    NextFrame();
+                                }
+                                else
+                                {
+                                    goingRight = false;
+                                }
                             }
-                            else if (currentFrame == 0)
+                            if (_color == "purple")
                             {
-                                currentFrame = 3;
-                            }
-                            else if (currentFrame == 3)
-                            {
-                                NextFrame();
-                            }
-                            else
-                            {
-                                goingRight = false;
+                                if (currentFrame < 9)
+                                {
+                                    NextFrame();
+                                }
+                                else
+                                {
+                                    goingRight = false;
+                                }
                             }
                         }
                         else
                         {
-                            if (currentFrame >= 0 && currentFrame < 2)
+                            if (_color == "pink")
                             {
-                                NextFrame();
+                                if (currentFrame > 0)
+                                {
+                                    SetFrame(currentFrame - 1);
+                                }
+                                else
+                                {
+                                    goingRight = true;
+                                }
                             }
-                            else if (currentFrame == 2)
+                            if (_color == "purple")
                             {
-                                goingRight = true;
-                            }
-                            else if (currentFrame == 4)
-                            {
-                                SetFrame(3);
-                            }
-                            else
-                            {
-                                SetFrame(0);
+                                if (currentFrame > 5)
+                                {
+                                    SetFrame(currentFrame - 1);
+                                }
+                                else
+                                {
+                                    goingRight = true;
+                                }
                             }
                         }
                     }
