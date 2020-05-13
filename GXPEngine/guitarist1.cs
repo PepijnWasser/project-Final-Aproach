@@ -37,13 +37,9 @@ namespace GXPEngine
                 }
                 else if (_satisfaction <= 2)
                 {
-                    if (currentFrame < 88)
+                    if(currentFrame < 22)
                     {
-                        
-                    }
-                    else
-                    {
-                        
+                        NextFrame();
                     }
                 }
                 else

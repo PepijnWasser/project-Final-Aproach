@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.IO;
 
 namespace GXPEngine
 {
     class Score : Canvas
     {
         Level _level;
-        int _score = 99;
+        public int score = 1000;
 
-        Font f = new Font(new FontFamily("Verdana"), 60);
+        Font f = new Font(new FontFamily("Verdana"), 45);
 
         public Score(Level level) : base(960, 720)
         {
@@ -21,38 +22,38 @@ namespace GXPEngine
         void Update()
         {
             graphics.Clear(Color.Empty);
-            if(_score < 10)
+            if(score < 10)
             {
-                graphics.DrawString(_score.ToString(), f, Brushes.White, 320, 220);
+                graphics.DrawString(score.ToString(), f, Brushes.HotPink, 260, 2);
             }
-            else if(_score < 100)
+            else if(score < 100)
             {
-                graphics.DrawString(_score.ToString(), f, Brushes.White, 310, 220);
+                graphics.DrawString(score.ToString(), f, Brushes.HotPink, 250, 2);
             }
-            else if(_score < 1000)
+            else if(score < 1000)
             {
-                graphics.DrawString(_score.ToString(), f, Brushes.White, 280, 220);
+                graphics.DrawString(score.ToString(), f, Brushes.HotPink, 230, 2);
             }
             else
             {
-                graphics.DrawString(_score.ToString(), f, Brushes.White, 250, 220);
+                graphics.DrawString(score.ToString(), f, Brushes.HotPink, 230, 2);
             }
            
         }
 
         public void AddScore()
         {
-            if (_level.GetSatisfaction() <= 10)
+            if (_level.GetSatisfaction() <= 2)
             {
-                _score = _score + 1;
+                score = score + 1;
             }
-            if (_level.GetSatisfaction() > 10 && _level.GetSatisfaction() < 40)
+            if (_level.GetSatisfaction() > 2 && _level.GetSatisfaction() < 22)
             {
-                _score = _score + 2;
+                score = score + 2;
             }
-            else if(_level.GetSatisfaction() >= 40)
+            else if(_level.GetSatisfaction() >= 22)
             {
-                _score = _score + 3;
+                score = score + 3;
             }
         }
     }

@@ -32,7 +32,7 @@ namespace GXPEngine
                         SetFrame(5);
                     }
                 }
-                if (_level.GetSatisfaction() > 10 && _level.GetSatisfaction() < 22)
+                if (_level.GetSatisfaction() > 2 && _level.GetSatisfaction() < 22)
                 {
                     if (currentFrame < 1)
                     {

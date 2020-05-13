@@ -81,7 +81,6 @@ namespace GXPEngine
             {
                 Console.WriteLine("hitLight");
             }
-            Console.WriteLine(_keyDrops.Count);
 
         }
 
@@ -91,10 +90,6 @@ namespace GXPEngine
             ResetValues();
             for (int j = 0; j < _keyDrops.Count; j++)
             {
-                if (_testDrop == _keyDrops[j])
-                {
-                    Console.WriteLine("tetettetetete");
-                }
                 if (_keyDrops[j].failed)
                 {
                     failed = true;

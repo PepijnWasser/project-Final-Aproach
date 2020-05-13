@@ -8,6 +8,8 @@ public enum Screen
     endScreen
 }
 
+
+
 class Screens : Canvas
 {
     Level _level;
@@ -15,6 +17,9 @@ class Screens : Canvas
     Startscreen _startScreen;
 
     Screen screen = Screen.startScreen;
+
+    int _score = 0;
+
 
     public Screens() : base(1920, 1080)
     {
@@ -76,6 +81,7 @@ class Screens : Canvas
         }
         if (_level != null)
         {
+            _score = _level.GetScore();
             _level.LateDestroy();
             _level = null;
         }
@@ -104,7 +110,7 @@ class Screens : Canvas
         }
         if (screen == Screen.endScreen)
         {
-            _endScreen = new EndScreen();
+            _endScreen = new EndScreen(_score);
             AddChild(_endScreen);
         }
 

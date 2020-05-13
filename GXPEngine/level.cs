@@ -49,8 +49,7 @@ namespace GXPEngine
             _lights = new List<Light>();
             _smokeMachines = new List<SmokeMachine>();
 
-            AddChild(space);        
-            AddChild(_bandmembers);
+            AddChild(space);                   
             AddChild(_satisfactionBar);
             AddChild(_music);
             AddChild(_score);
@@ -63,6 +62,8 @@ namespace GXPEngine
             AddLights();
             AddFlames();
             AddSmokeMachines();
+
+            AddChild(_bandmembers);
 
         }
         ////////////////////////////////////////////////////////////////////////////
@@ -153,25 +154,21 @@ namespace GXPEngine
                 {
                     _score.AddScore();
                     _satisfactionBar.SetAddScore(5);
-                    Console.WriteLine("1");
                 }
                 if (keyDropControl.hitSmoke == true)
                 {
                     _score.AddScore();
                     _satisfactionBar.SetAddScore(5);
-                    Console.WriteLine("2");
                 }
                 if (keyDropControl.hitLight == true)
                 {
                     _score.AddScore();
                     _satisfactionBar.SetAddScore(5);
-                    Console.WriteLine("3");
                 }
                 if (keyDropControl.hitFlame == true)
                 {
                     _score.AddScore();
                     _satisfactionBar.SetAddScore(5);
-                    Console.WriteLine("4");
                 }
 
             }
@@ -220,9 +217,14 @@ namespace GXPEngine
             return _music.bpm;
         }
 
+        public int GetScore()
+        {
+            return _score.score;
+        }
+
         public bool ChangeScreen()
         {
-            if(Input.GetKey(Key.P))
+            if(_music.noMoreMusic)
             {
                 _music.StopMusic();
                 return true;

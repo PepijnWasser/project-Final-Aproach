@@ -9,8 +9,9 @@ namespace GXPEngine
     {
         SoundChannel _musicChannel;
         Sound _music;
-        int _musicToPlay = 1;
+        int _musicToPlay = 4;
         public float bpm;
+        public bool noMoreMusic = false;
 
         public LevelMusic() : base(1920, 1080)
         {
@@ -33,11 +34,6 @@ namespace GXPEngine
         // play the next song
         public void NewMusic()
         {         
-            if(_musicToPlay > 4)
-            {
-                _musicToPlay = 1;
-            }
-
             if(_musicToPlay == 1)
             {
                 _music = new Sound("pressure.wav", false, false);
@@ -59,7 +55,10 @@ namespace GXPEngine
                 bpm = 1000 / (115f / 60f);
             }
             _musicToPlay = _musicToPlay + 1;
-            Console.WriteLine(bpm);
+            if(_musicToPlay > 4)
+            {
+                noMoreMusic = true;
+            }
         }
 
         // stop the music

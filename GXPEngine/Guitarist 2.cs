@@ -14,7 +14,7 @@ namespace GXPEngine
         public Guitarist2(Bandmembers bandmembers) : base("guitarist 2.png", 8, 8)
         {
             _bandmembers = bandmembers;
-            SetXY(500, 250);
+            SetXY(480, 250);
         }
 
         void Update()
@@ -37,13 +37,9 @@ namespace GXPEngine
                 }
                 else if (_satisfaction <= 2)
                 {
-                    if (currentFrame < 88)
+                    if(currentFrame < 60)
                     {
-
-                    }
-                    else
-                    {
-
+                        NextFrame();
                     }
                 }
                 else
