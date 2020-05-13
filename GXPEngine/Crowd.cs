@@ -5,61 +5,58 @@ using System.Text;
 
 namespace GXPEngine
 {
-    class Drummer : AnimationSprite
+    class Crowd : AnimationSprite
     {
+        Level _level;
         int millisecondCounter;
-        float _satisfaction;
 
-        Bandmembers _bandmembers;
-
-        public Drummer(Bandmembers bandmembers) : base("drummer.png", 9, 10)
+        public Crowd(Level level) : base("crowd.png", 1, 7)
         {
-            _bandmembers = bandmembers;
-            SetXY(308, 307);
+            _level = level;
+            this.SetXY(0, 540);
         }
 
         void Update()
         {
-            //every 70 milliseconds go change the frame depending on satisfaction
-            _satisfaction = _bandmembers._satisfaction;
             millisecondCounter = millisecondCounter + Time.deltaTime;
-            if(millisecondCounter > 70)
+            if(millisecondCounter > 200)
             {
-                if (_satisfaction < 22 && _satisfaction > 2)
+                if(_level.GetSatisfaction() <= 2)
                 {
-                    if (currentFrame < 56)
+                    if(currentFrame < 6)
                     {
                         NextFrame();
                     }
                     else
                     {
-                        SetFrame(40);
+                        SetFrame(5);
                     }
                 }
-                else if (_satisfaction <= 2)
+                if (_level.GetSatisfaction() > 2 && _level.GetSatisfaction() < 22)
                 {
-                    if (currentFrame < 88)
+                    if (currentFrame < 1)
                     {
                         NextFrame();
                     }
                     else
                     {
-                        SetFrame(58);
+                        SetFrame(0);
                     }
                 }
-                else
+                if (_level.GetSatisfaction() > 22)
                 {
-                    if (currentFrame < 34)
+                    if (currentFrame < 4)
                     {
                         NextFrame();
                     }
                     else
                     {
-                        SetFrame(1);
+                        SetFrame(2);
                     }
-                }        
+                }
+
                 millisecondCounter = 0;
-            }        
+            }
         }
     }
 }

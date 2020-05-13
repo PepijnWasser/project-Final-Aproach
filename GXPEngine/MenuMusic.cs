@@ -15,6 +15,7 @@ namespace GXPEngine
             _musicChannel = _music.Play();
         }
 
+        // play the menu music
         void Update()
         {
             if (_musicChannel.IsPlaying == false)

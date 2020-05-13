@@ -5,17 +5,16 @@ using System.Text;
 
 namespace GXPEngine
 {
-    class Drummer : AnimationSprite
+    class Guitarist2 : AnimationSprite
     {
-        int millisecondCounter;
-        float _satisfaction;
-
         Bandmembers _bandmembers;
+        float _satisfaction;
+        int millisecondCounter;
 
-        public Drummer(Bandmembers bandmembers) : base("drummer.png", 9, 10)
+        public Guitarist2(Bandmembers bandmembers) : base("guitarist 2.png", 8, 8)
         {
             _bandmembers = bandmembers;
-            SetXY(308, 307);
+            SetXY(480, 250);
         }
 
         void Update()
@@ -23,33 +22,29 @@ namespace GXPEngine
             //every 70 milliseconds go change the frame depending on satisfaction
             _satisfaction = _bandmembers._satisfaction;
             millisecondCounter = millisecondCounter + Time.deltaTime;
-            if(millisecondCounter > 70)
+            if (millisecondCounter > 70)
             {
                 if (_satisfaction < 22 && _satisfaction > 2)
                 {
-                    if (currentFrame < 56)
+                    if (currentFrame < 36)
                     {
                         NextFrame();
                     }
                     else
                     {
-                        SetFrame(40);
+                        SetFrame(27);
                     }
                 }
                 else if (_satisfaction <= 2)
                 {
-                    if (currentFrame < 88)
+                    if(currentFrame < 60)
                     {
                         NextFrame();
-                    }
-                    else
-                    {
-                        SetFrame(58);
                     }
                 }
                 else
                 {
-                    if (currentFrame < 34)
+                    if (currentFrame < 26)
                     {
                         NextFrame();
                     }
@@ -57,9 +52,9 @@ namespace GXPEngine
                     {
                         SetFrame(1);
                     }
-                }        
+                }
                 millisecondCounter = 0;
-            }        
+            }
         }
     }
 }

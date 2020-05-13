@@ -7,7 +7,7 @@ namespace GXPEngine
 {
     class KeyDrop : AnimationSprite
     {
-        int speed = 20;
+        int speed = 5;
         int column;
 
         int _rowControl;
@@ -19,7 +19,7 @@ namespace GXPEngine
         public bool needToDestroy;
         public bool failed;
 
-        public KeyDrop(int RowControl) : base("keyanimation.png", 4, 1)
+        public KeyDrop(int RowControl) : base("keyanimation.png", 3, 3)
         {
             _rowControl = RowControl;
             SetPosition();
@@ -27,29 +27,27 @@ namespace GXPEngine
 
         void SetPosition()
         {
+            //depending on the column it got from keycontrol change the position to that row
             column = _rowControl;
 
             if (column == 1)
             {
-                this.SetXY(1250, 0);
+                this.SetXY(732, 0);
             }
             if (column == 2)
             {
-                this.SetXY(1325, 0);
-                NextFrame();
+                this.SetXY(795, 0);
+                SetFrame(2);
             }
             if (column == 3)
             {
-                this.SetXY(1400, 0);
-                NextFrame();
-                NextFrame();
+                this.SetXY(855, 0);
+                SetFrame(4);
             }
             if (column == 4)
             {
-                this.SetXY(1475, 0);
-                NextFrame();
-                NextFrame();
-                NextFrame();
+                this.SetXY(915, 0);
+                SetFrame(6);
             }
         }
 
@@ -63,12 +61,15 @@ namespace GXPEngine
 
         void TestKeyPress()
         {
+            // if the block is 200 above the bottom test if the correct button is pressed
+            //if true return the type of key
+            //if false return that it failed
             MyGame myGame = (MyGame)game;
             if (this.y > myGame.height - 200)
             {
                 if(currentFrame == 0)
                 {
-                    if (Input.GetKey(Key.A))
+                    if (Input.GetKey(Key.D))
                     {
                         hitSpeaker = true;
                     }
@@ -77,9 +78,9 @@ namespace GXPEngine
                         failed = true;
                     }
                 }
-                if (currentFrame == 1)
+                if (currentFrame == 2)
                 {
-                    if (Input.GetKey (Key.S))
+                    if (Input.GetKey (Key.F))
                     {
                         hitFlame = true;
                     }
@@ -88,9 +89,9 @@ namespace GXPEngine
                         failed = true;
                     }
                 }
-                if (currentFrame == 2)
+                if (currentFrame == 4)
                 {
-                    if (Input.GetKey(Key.D))
+                    if (Input.GetKey(Key.J))
                     {
                         hitLight = true;
                     }
@@ -99,9 +100,9 @@ namespace GXPEngine
                         failed = true;
                     }
                 }
-                if (currentFrame == 3)
+                if (currentFrame == 6)
                 {
-                    if (Input.GetKey(Key.F))
+                    if (Input.GetKey(Key.K))
                     {
                         hitSmoke = true;
                     }
@@ -116,11 +117,13 @@ namespace GXPEngine
 
         void Fall()
         {
+            //just falling
             this.y = this.y + speed;
         }
 
         void OutOfBounds()
         {
+            //if the block is out of the screen indicate that it needs to be deleted
             MyGame myGame = (MyGame)game;
             if (this.y > myGame.height)
             {

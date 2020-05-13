@@ -7,7 +7,7 @@ namespace GXPEngine
 {
     class Startscreen : AnimationSprite
     {
-
+        MenuMusic _music = new MenuMusic();
         public Startscreen() : base("startscreen" + ".png", 8, 1)
         {
 
@@ -15,7 +15,7 @@ namespace GXPEngine
 
         void Update()
         {
-
+            NextFrame();
         }
         
         /// ///////////////////////////////////////////////////////////////////////
@@ -25,6 +25,7 @@ namespace GXPEngine
         {
             if (Input.GetKey(Key.E))
             {
+                _music.StopMusic();
                 return true;
             }
             else

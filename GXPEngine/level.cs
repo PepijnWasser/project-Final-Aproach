@@ -8,11 +8,8 @@ namespace GXPEngine
 {
     public class Level : Canvas
     {
-        int _levelMillisecondCounter;
-        int _levelSecondCounter;
-
         Background space = new Background();
-        KeyDropControl keyDropControl = new KeyDropControl();
+        KeyDropControl keyDropControl;
 
         List<Speaker> _speakers;
         Speaker _speaker;
@@ -22,6 +19,8 @@ namespace GXPEngine
 
         Bandmembers _bandmembers;
 
+        Score _score;
+
         List<Flame> _flames;
         Flame _flame;
 
@@ -30,35 +29,51 @@ namespace GXPEngine
 
         SatisfactionBar _satisfactionBar = new SatisfactionBar();
 
-        Music _music = new Music();
+        SideBar _sideBar = new SideBar();
 
-        public Level() : base(600, 1080, false)
+        LevelMusic _music = new LevelMusic();
+
+        SatisfactionCase _satisfactionCase = new SatisfactionCase();
+
+        Crowd _crowd;
+
+        public Level() : base(960, 720, false)
         {
             _bandmembers = new Bandmembers(this);
+            _score = new Score(this);
+            keyDropControl = new KeyDropControl(this);
+            _crowd = new Crowd(this);
 
             _speakers = new List<Speaker>();
             _flames = new List<Flame>();
             _lights = new List<Light>();
             _smokeMachines = new List<SmokeMachine>();
 
-            AddChild(space);
-            AddChild(keyDropControl);           
-            AddChild(_bandmembers);
+            AddChild(space);                   
             AddChild(_satisfactionBar);
             AddChild(_music);
+            AddChild(_score);
+            AddChild(_crowd);
+            AddChild(_sideBar);
+            AddChild(_satisfactionCase);
+            AddChild(keyDropControl);
 
             AddSpeakers();
             AddLights();
             AddFlames();
             AddSmokeMachines();
 
-        }
+            AddChild(_bandmembers);
 
+        }
+        ////////////////////////////////////////////////////////////////////////////
+        ///until void Update(): spawn a object and add it to a list of those objects
+        ////////////////////////////////////////////////////////////////////////////
         void AddSpeakers()
         {
-            _speaker = new Speaker(200, 200);
+            _speaker = new Speaker(33, 373);
             _speakers.Add(_speaker);
-            _speaker = new Speaker(500, 500);
+            _speaker = new Speaker(575, 373);
             _speakers.Add(_speaker);
 
             for(int i = 0; i < _speakers.Count; i++)
@@ -68,9 +83,9 @@ namespace GXPEngine
         }
         void AddLights()
         {
-            _light = new Light(this, 100, 100);
+            _light = new Light(this, 137, 110);
             _lights.Add(_light);
-            _light = new Light(this, 400, 400);
+            _light = new Light(this, 471, 110);
             _lights.Add(_light);
 
             for (int i = 0; i < _lights.Count; i++)
@@ -80,9 +95,9 @@ namespace GXPEngine
         }
         void AddSmokeMachines()
         {
-            _smokemachine = new SmokeMachine(this, 700, 100);
+            _smokemachine = new SmokeMachine(this, 485, 362, true);
             _smokeMachines.Add(_smokemachine);
-            _smokemachine = new SmokeMachine(this, 600, 700);
+            _smokemachine = new SmokeMachine(this, 250, 362, false);
             _smokeMachines.Add(_smokemachine);
 
             for (int i = 0; i < _smokeMachines.Count; i++)
@@ -93,9 +108,13 @@ namespace GXPEngine
 
         void AddFlames()
         {
-            _flame = new Flame(this, 100, 100);
+            _flame = new Flame(this, 581, 272);
             _flames.Add(_flame);
-            _flame = new Flame(this, 400, 400);
+            _flame = new Flame(this, 37, 272);
+            _flames.Add(_flame);
+            _flame = new Flame(this, 250, 299);
+            _flames.Add(_flame);
+            _flame = new Flame(this, 380, 299);
             _flames.Add(_flame);
 
             for (int i = 0; i < _flames.Count; i++)
@@ -107,28 +126,55 @@ namespace GXPEngine
 
         void Update()
         {
-            BackgroundControl();
+            TestSong();
             TestAnimatables();
             TestScoring();
         }
 
-        void TestScoring()
+        //if you press M it goes to the next song
+        void TestSong()
         {
-            if(keyDropControl.failed == true)
+            if (Input.GetKeyDown(Key.M))
             {
-                _satisfactionBar.SetRemoveScore();
-            }
-            else if(keyDropControl.hitSpeaker == true || keyDropControl.hitLight == true)
-            {
-                _satisfactionBar.SetAddScore(5);
-            }
-
-            if(keyDropControl.switched == true)
-            {
-                _satisfactionBar.SetAddScore(15);
+                _music.NextSong();
             }
         }
 
+        //if you failed something remove score. if you did something right add score
+        void TestScoring()
+        {
+            if (keyDropControl.failed == true)
+            {
+                _satisfactionBar.SetRemoveScore();
+                
+            }
+            else
+            {
+                if (keyDropControl.hitSpeaker == true)
+                {
+                    _score.AddScore();
+                    _satisfactionBar.SetAddScore(5);
+                }
+                if (keyDropControl.hitSmoke == true)
+                {
+                    _score.AddScore();
+                    _satisfactionBar.SetAddScore(5);
+                }
+                if (keyDropControl.hitLight == true)
+                {
+                    _score.AddScore();
+                    _satisfactionBar.SetAddScore(5);
+                }
+                if (keyDropControl.hitFlame == true)
+                {
+                    _score.AddScore();
+                    _satisfactionBar.SetAddScore(5);
+                }
+
+            }
+        }
+
+        //if you did something reght animate the right thing
         void TestAnimatables()
         {
             if (keyDropControl.hitFlame)
@@ -161,30 +207,24 @@ namespace GXPEngine
             }
         }
 
-        void BackgroundControl()
-        {
-            _levelMillisecondCounter += Time.deltaTime;
-            if (_levelMillisecondCounter >= 1000)
-            {
-                _levelMillisecondCounter = 0;
-                _levelSecondCounter = _levelSecondCounter + 1;
-            }
-            if (_levelSecondCounter == 60)
-            {
-                space.UpdateFrame();
-                _levelSecondCounter = 0;
-            }
-        }  
-
         public float GetSatisfaction()
         {
             return _satisfactionBar.scaling;
         }
 
+        public float GetBPM()
+        {
+            return _music.bpm;
+        }
+
+        public int GetScore()
+        {
+            return _score.score;
+        }
 
         public bool ChangeScreen()
         {
-            if(Input.GetKey(Key.P))
+            if(_music.noMoreMusic)
             {
                 _music.StopMusic();
                 return true;

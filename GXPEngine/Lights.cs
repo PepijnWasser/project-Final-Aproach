@@ -26,13 +26,14 @@ namespace GXPEngine
 
         void Update()
         {
+            // if the animation needs to play play it every 50 milliseconds for 30 cycles
             satisfaction = _level.GetSatisfaction();
             if (playingAnimation == true)
             {
                 millesecondCounter = millesecondCounter + Time.deltaTime;
                 if (millesecondCounter > 70)
                 {
-                    if(satisfaction <= 10)
+                    if(satisfaction <= 2)
                     {
                         if(currentFrame < 7)
                         {
