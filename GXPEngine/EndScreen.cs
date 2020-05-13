@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace GXPEngine
 {
@@ -29,14 +30,14 @@ namespace GXPEngine
         readonly int _scoreGot;
 
         //-------------------------------endscreen needs new image
-        public EndScreen() : base("endScreen.png")
+        public EndScreen(int scoreGot) : base("endScreen.png")
         {
             this.SetXY(0, -10);
             this.SetScaleXY((float)1.2, (float)1.2);
 
-            //needs to be updated to the score 
-            _scoreGot = 4;
-            string[] lines = File.ReadAllLines(path + "txt");
+            _scoreGot = scoreGot;
+            string path = Path.GetDirectoryName("scoreboard.txt");
+            string[] lines = File.ReadAllLines(path + "scoreboard.txt");
 
             //make an array with all scores got
             for (int i = 0; i < lines.Length; i++)
@@ -96,59 +97,242 @@ namespace GXPEngine
             }
 
             //search for topscore and get the player who got that score
+            var playerNumbersUsed = new List<int>();
+            bool player1Full = false;
+            bool player2Full = false;
+            bool player3Full = false;
+            bool player4Full = false;
+            bool player5Full = false;
+
             for (int i = 0; i < lines.Length; i++)
-            {
-                _scoretoCompare = _top1Score.ToString();               
+            {               
+                _scoretoCompare = _top1Score.ToString();
                 int top1scorelength = Int32.Parse(Math.Ceiling(Math.Log10(_top1Score)).ToString());
+                if(_top1Score == 1)
+                {
+                    top1scorelength = 1;
+                }
+                if (_top1Score == 10)
+                {
+                    top1scorelength = 2;
+                }
+                if (_top1Score == 100)
+                {
+                    top1scorelength = 3;
+                }
+                if (_top1Score == 1000)
+                {
+                    top1scorelength = 4;
+                }
+                if (_top1Score == 10000)
+                {
+                    top1scorelength = 5;
+                }
                 if (lines[i].Length >= 7 + top1scorelength && lines[i].Substring(0, 7 + top1scorelength).ToUpper() == "SCORE: "+_top1Score)
                 {                   
-                    _playerThatGotHighScoreLine = lines[i - 1].Split(':');
+                    _playerThatGotHighScoreLine = lines[i - 1].Split(':');                   
                     if (_playerThatGotHighScoreLine.Length >= 2 && int.TryParse(_playerThatGotHighScoreLine[1], out int player1))
                     {
-                        _top1Player = player1;                    
-                    } 
+                        bool used = false;
+                        foreach (int player in playerNumbersUsed)
+                        {
+                            if (player1 == player)
+                            {
+                                used = true;
+                                Console.WriteLine("test");
+                            }
+                        }
+                        if (used == false && player1Full == false)
+                        {
+                            player1Full = true;
+                            _top1Player = player1;
+                            Console.WriteLine("player 1");
+                            playerNumbersUsed.Add(Int32.Parse(_playerThatGotHighScoreLine[1]));
+                        }
+                    }
                 }
                 _scoretoCompare = _top2Score.ToString();
                 int top2scorelength = Int32.Parse(Math.Ceiling(Math.Log10(_top2Score)).ToString());
+                if (_top2Score == 1)
+                {
+                    top2scorelength = 1;
+                }
+                if (_top2Score == 10)
+                {
+                    top2scorelength = 2;
+                }
+                if (_top2Score == 100)
+                {
+                    top2scorelength = 3;
+                }
+                if (_top2Score == 1000)
+                {
+                    top2scorelength = 4;
+                }
+                if (_top2Score == 10000)
+                {
+                    top2scorelength = 5;
+                }
                 if (lines[i].Length >= 7 + top2scorelength && lines[i].Substring(0, 7 + top2scorelength).ToUpper() == "SCORE: " + _top2Score)
                 {
                     _playerThatGotHighScoreLine = lines[i - 1].Split(':');
                     if (_playerThatGotHighScoreLine.Length >= 2 && int.TryParse(_playerThatGotHighScoreLine[1], out int player2))
                     {
-                        _top2Player = player2;
+                        bool used = false;
+                        foreach (int player in playerNumbersUsed)
+                        {
+                            if (player2 == player)
+                            {
+                                used = true;
+                            }
+                        }
+                        if (used == false && player2Full == false)
+                        {
+                            player2Full = true;
+                            _top2Player = player2;
+                            Console.WriteLine("player 2");
+                            playerNumbersUsed.Add(Int32.Parse(_playerThatGotHighScoreLine[1]));
+                        }
                     }
                 }
                 _scoretoCompare = _top3Score.ToString();
                 int top3scorelength = Int32.Parse(Math.Ceiling(Math.Log10(_top3Score)).ToString());
+                if (_top3Score == 1)
+                {
+                    top3scorelength = 1;
+                }
+                if (_top3Score == 10)
+                {
+                    top3scorelength = 2;
+                }
+                if (_top3Score == 100)
+                {
+                    top3scorelength = 3;
+                }
+                if (_top3Score == 1000)
+                {
+                    top3scorelength = 4;
+                }
+                if (_top3Score == 10000)
+                {
+                    top3scorelength = 5;
+                }
                 if (lines[i].Length >= 7 + top3scorelength && lines[i].Substring(0, 7 + top3scorelength).ToUpper() == "SCORE: " + _top3Score)
                 {
                     _playerThatGotHighScoreLine = lines[i - 1].Split(':');
                     if (_playerThatGotHighScoreLine.Length >= 2 && int.TryParse(_playerThatGotHighScoreLine[1], out int player3))
                     {
-                        _top3Player = player3;
+                        bool used = false;
+                        foreach (int player in playerNumbersUsed)
+                        {
+                            if (player3 == player)
+                            {
+                                used = true;
+                            }
+                        }
+                        if (used == false && player3Full == false)
+                        {
+                            player3Full = true;
+                            _top3Player = player3;
+                            Console.WriteLine("player 3");
+                            playerNumbersUsed.Add(Int32.Parse(_playerThatGotHighScoreLine[1]));
+                        }
                     }
                 }
                 _scoretoCompare = _top4Score.ToString();
                 int top4scorelength = Int32.Parse(Math.Ceiling(Math.Log10(_top4Score)).ToString());
+                if (_top1Score == 1)
+                {
+                    top4scorelength = 1;
+                }
+                if (_top4Score == 10)
+                {
+                    top4scorelength = 2;
+                }
+                if (_top4Score == 100)
+                {
+                    top4scorelength = 3;
+                }
+                if (_top4Score == 1000)
+                {
+                    top4scorelength = 4;
+                }
+                if (_top4Score == 10000)
+                {
+                    top4scorelength = 5;
+                }
                 if (lines[i].Length >= 7 + top3scorelength && lines[i].Substring(0, 7 + top4scorelength).ToUpper() == "SCORE: " + _top4Score)
                 {
                     _playerThatGotHighScoreLine = lines[i - 1].Split(':');
                     if (_playerThatGotHighScoreLine.Length >= 2 && int.TryParse(_playerThatGotHighScoreLine[1], out int player4))
                     {
-                        _top4Player = player4;
+                        bool used = false;
+                        foreach (int player in playerNumbersUsed)
+                        {
+                            if (player4 == player)
+                            {
+                                used = true;
+                            }
+                        }
+                        if (used == false && player4Full == false)
+                        {
+                            player4Full = true;
+                            _top4Player = player4;
+                            Console.WriteLine("player 4");
+                            playerNumbersUsed.Add(Int32.Parse(_playerThatGotHighScoreLine[1]));
+                        }
                     }
                 }
                 _scoretoCompare = _top5Score.ToString();
                 int top5scorelength = Int32.Parse(Math.Ceiling(Math.Log10(_top5Score)).ToString());
+                if (_top5Score == 1)
+                {
+                    top5scorelength = 1;
+                }
+                if (_top5Score == 10)
+                {
+                    top5scorelength = 2;
+                }
+                if (_top5Score == 100)
+                {
+                    top5scorelength = 3;
+                }
+                if (_top5Score == 1000)
+                {
+                    top5scorelength = 4;
+                }
+                if (_top5Score == 10000)
+                {
+                    top5scorelength = 5;
+                }
                 if (lines[i].Length >= 7 + top3scorelength && lines[i].Substring(0, 7 + top5scorelength).ToUpper() == "SCORE: " + _top5Score)
                 {
                     _playerThatGotHighScoreLine = lines[i - 1].Split(':');
                     if (_playerThatGotHighScoreLine.Length >= 2 && int.TryParse(_playerThatGotHighScoreLine[1], out int player5))
                     {
-                        _top5Player = player5;
+                        bool used = false;
+                        foreach(int player in playerNumbersUsed)
+                        {
+                            if(player5 == player)
+                            {
+                                used = true;
+                            }
+                        }
+                        if(used == false && player5Full == false)
+                        {
+                            player5Full = true;
+                            _top5Player = player5;
+                            Console.WriteLine("player 5");
+                            playerNumbersUsed.Add(Int32.Parse(_playerThatGotHighScoreLine[1]));
+                        }
                     }
                 }
-            }            
+            }
+
+            foreach(int player in playerNumbersUsed)
+            {
+                Console.WriteLine(player);
+            }
 
             //make an array with all scores got
             for (int i = 0; i < lines.Length; i++)
@@ -169,10 +353,10 @@ namespace GXPEngine
                 if (TempPlayer > _heigestPlayerNumber)
                 {
                     _heigestPlayerNumber = TempPlayer;
-                    _yourPlayerNumber = _heigestPlayerNumber + 1;
+                    _yourPlayerNumber = _heigestPlayerNumber + 1;             
                 }
             }
-            File.AppendAllText(@"C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project lift off\GXPEngine\bin\Debug\scoreboard.txt", System.Environment.NewLine + "PLAYER: " + _yourPlayerNumber + System.Environment.NewLine + "SCORE: " + _scoreGot);
+            File.AppendAllText(path + "scoreboard.txt", System.Environment.NewLine + "PLAYER: " + _yourPlayerNumber + System.Environment.NewLine + "SCORE: " + _scoreGot);
        
             //draws all scores
             //---------------------------potentionally better way to do things
@@ -185,7 +369,7 @@ namespace GXPEngine
         /// ///////////////////////////////////////////////////////////////////////
         public bool ChangeScreen()
         {
-            if (Input.GetKey(Key.E))
+            if (Input.GetKey(Key.Z))
             {
                 return true;
             }
