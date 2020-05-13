@@ -96,23 +96,23 @@ namespace GXPEngine
                 }
                 if (_keyDrops[j].hitSmoke)
                 {
-                    Console.WriteLine(_keyDrops[j].needToDestroy);
+                    Console.WriteLine(_keyDrops[j].needToRemove);
                     hitSmoke = true;
                 }
                 if (_keyDrops[j].hitSpeaker)
                 {
-                    Console.WriteLine(_keyDrops[j].needToDestroy);
+                    Console.WriteLine(_keyDrops[j].needToRemove);
                     hitSpeaker = true;
                 }
                 if (_keyDrops[j].hitFlame)
                 {
-                    Console.WriteLine(_keyDrops[j].needToDestroy);
+                    Console.WriteLine(_keyDrops[j].needToRemove);
                     hitFlame = true;
                     _testDrop = _keyDrops[j];
                 }
                 if (_keyDrops[j].hitLight)
                 {
-                    Console.WriteLine(_keyDrops[j].needToDestroy);
+                    Console.WriteLine(_keyDrops[j].needToRemove);
                     hitLight = true;
                 }
             }
@@ -133,10 +133,8 @@ namespace GXPEngine
 
             for (int i = 0; i < _keyDrops.Count; i++)
             {
-                if (_keyDrops[i].needToDestroy)
+                if (_keyDrops[i].needToRemove)
                 {
-                    _keyDrops[i].LateDestroy();
-                    _keyDrops[i] = null;
                     _keydropsToDelete.Add(_keyDrops[i]);
                 }
             }
