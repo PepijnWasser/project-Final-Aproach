@@ -66,6 +66,14 @@ class Screens : Canvas
                 screen = Screen.game;
                 ResetScreens();
             }
+            else
+            {
+                if (_startScreen.highscorePressed)
+                {
+                    screen = Screen.endScreen;
+                    ResetScreens();
+                }
+            }
         }
     }
 

@@ -12,7 +12,7 @@ namespace GXPEngine
         Level _level;
         public int score = 1000;
 
-        Font f = new Font(new FontFamily("Verdana"), 45);
+        Font f = new Font(new FontFamily("Light Pixel-7"), 45);
 
         public Score(Level level) : base(960, 720)
         {

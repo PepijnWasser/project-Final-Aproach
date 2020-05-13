@@ -9,7 +9,7 @@ namespace GXPEngine
     {
         SoundChannel _musicChannel;
         Sound _music;
-        int _musicToPlay = 4;
+        int _musicToPlay = 1;
         public float bpm;
         public bool noMoreMusic = false;
 

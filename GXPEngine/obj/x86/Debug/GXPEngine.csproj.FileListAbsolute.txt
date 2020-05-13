@@ -18,3 +18,9 @@ C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project-Final-Apro
 C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project-Final-Aproach-master\GXPEngine\obj\x86\Debug\GXPEngine.csprojAssemblyReference.cache
 C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project-Final-Aproach-master\GXPEngine\obj\x86\Debug\GXPEngine.exe
 C:\Users\peppi\OneDrive\Desktop\project final aproach\project\project-Final-Aproach-master\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+C:\Users\Radu Trifu\Documents\GitHub\project-Final-Aproach-master\GXPEngine\bin\Debug\GXPEngine.exe
+C:\Users\Radu Trifu\Documents\GitHub\project-Final-Aproach-master\GXPEngine\bin\Debug\GXPEngine.pdb
+C:\Users\Radu Trifu\Documents\GitHub\project-Final-Aproach-master\GXPEngine\obj\x86\Debug\GXPEngine.csprojAssemblyReference.cache
+C:\Users\Radu Trifu\Documents\GitHub\project-Final-Aproach-master\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+C:\Users\Radu Trifu\Documents\GitHub\project-Final-Aproach-master\GXPEngine\obj\x86\Debug\GXPEngine.exe
+C:\Users\Radu Trifu\Documents\GitHub\project-Final-Aproach-master\GXPEngine\obj\x86\Debug\GXPEngine.pdb
