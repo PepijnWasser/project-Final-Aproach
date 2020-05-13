@@ -12,14 +12,18 @@ namespace GXPEngine
 
         int _rowControl;
 
+        int millisecondCounter = 0;
+
         public bool hitSpeaker;
         public bool hitLight;
         public bool hitSmoke;
         public bool hitFlame;
-        public bool needToDestroy;
+        public bool needToRemove;
         public bool failed;
 
-        public KeyDrop(int RowControl) : base("keyanimation.png", 3, 3)
+        bool playAnimation = false;
+
+        public KeyDrop(int RowControl) : base("keyanimation.png", 4, 5)
         {
             _rowControl = RowControl;
             SetPosition();
@@ -37,17 +41,17 @@ namespace GXPEngine
             if (column == 2)
             {
                 this.SetXY(795, 0);
-                SetFrame(2);
+                SetFrame(15);
             }
             if (column == 3)
             {
                 this.SetXY(855, 0);
-                SetFrame(4);
+                SetFrame(10);
             }
             if (column == 4)
             {
                 this.SetXY(915, 0);
-                SetFrame(6);
+                SetFrame(5);
             }
         }
 
@@ -56,6 +60,10 @@ namespace GXPEngine
             Fall();
             OutOfBounds();
             TestKeyPress();
+            if(playAnimation == true)
+            {
+                PlayAnimation();
+            }
 
         }
 
@@ -72,46 +80,91 @@ namespace GXPEngine
                     if (Input.GetKey(Key.D))
                     {
                         hitSpeaker = true;
+                        playAnimation = true;
                     }
                     else
                     {
                         failed = true;
                     }
                 }
-                if (currentFrame == 2)
+                if (currentFrame == 15)
                 {
                     if (Input.GetKey (Key.F))
                     {
                         hitFlame = true;
+                        playAnimation = true;
                     }
                     else
                     {
                         failed = true;
                     }
                 }
-                if (currentFrame == 4)
+                if (currentFrame == 10)
                 {
                     if (Input.GetKey(Key.J))
                     {
                         hitLight = true;
+                        playAnimation = true;
                     }
                     else
                     {
                         failed = true;
                     }
                 }
-                if (currentFrame == 6)
+                if (currentFrame == 5)
                 {
                     if (Input.GetKey(Key.K))
                     {
                         hitSmoke = true;
+                        playAnimation = true;
                     }
                     else
                     {
                         failed = true;
                     }
                 }
-                needToDestroy = true;
+                needToRemove = true;
+            }
+        }
+
+        void PlayAnimation()
+        {
+            millisecondCounter = millisecondCounter + Time.deltaTime;
+            if(millisecondCounter > 70)
+            {
+                if(column == 1)
+                {
+                    NextFrame();
+                    if(currentFrame == 5)
+                    {
+                        this.LateDestroy();
+                    }
+                }
+                if(column == 2)
+                {
+                    NextFrame();
+                    if(currentFrame == 0)
+                    {
+                        this.LateDestroy();
+                    }
+                }
+                if(column == 3)
+                {
+                    NextFrame();
+                    if(currentFrame == 15)
+                    {
+                        this.LateDestroy();
+                    }
+                }
+                if(column == 4)
+                {
+                    NextFrame();
+                    if(currentFrame == 10)
+                    {
+                        this.LateDestroy();
+                    }
+                }
+                millisecondCounter = 0;
             }
         }
 
@@ -127,7 +180,7 @@ namespace GXPEngine
             MyGame myGame = (MyGame)game;
             if (this.y > myGame.height)
             {
-                needToDestroy = true;
+                this.LateDestroy();
             }
         }
     }
