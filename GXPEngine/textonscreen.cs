@@ -23,7 +23,11 @@ namespace GXPEngine
         string _yourPosition;
         string _scoreGot;
 
-        Font f = new Font(new FontFamily("Light Pixel-7"), 20);
+        Font f = new Font(new FontFamily("Light Pixel-7"), 10);
+        Font g = new Font(new FontFamily("Light Pixel-7"), 15);
+        Font h = new Font(new FontFamily("Light Pixel-7"), 20);
+        Font i = new Font(new FontFamily("Light Pixel-7"), 25);
+        Font j = new Font(new FontFamily("Light Pixel-7"), 30);
 
         public textonscreen(int top1player, int top1score, int top2player, int top2score, int top3player, int top3score, int top4player, int top4score, int top5player, int top5score, int yourplayernumber, int yourPosition, int scoreGot) : base(600, 800)
             {
@@ -49,14 +53,14 @@ namespace GXPEngine
             graphics.DrawString(_top4player, f, Brushes.Cyan, 410, 498);
             graphics.DrawString(_top5player, f, Brushes.Cyan, 410, 547);*/
 
-            graphics.DrawString(_top1score, f, Brushes.Cyan, 400, 240);
-            graphics.DrawString(_top2score, f, Brushes.Cyan, 400, 302);
-            graphics.DrawString(_top3score, f, Brushes.Cyan, 400, 375);
-            graphics.DrawString(_top4score, f, Brushes.Cyan, 400, 470);
-            graphics.DrawString(_top5score, f, Brushes.Cyan, 400, 585);
+            graphics.DrawString(_top1score, f, Brushes.Cyan, 390, 250);
+            graphics.DrawString(_top2score, g, Brushes.Cyan, 380, 305);
+            graphics.DrawString(_top3score, h, Brushes.Cyan, 370, 375);
+            graphics.DrawString(_top4score, i, Brushes.Cyan, 360, 465);
+            graphics.DrawString(_top5score, j, Brushes.Cyan, 350, 585);
 
             //sets your current achievment and player number
-            graphics.DrawString(_scoreGot, f, Brushes.Cyan, 500, 190);
+            graphics.DrawString(_scoreGot, h, Brushes.Cyan, 500, 190);
             /*graphics.DrawString(_yourplayernumber, f, Brushes.Cyan, 550, 190);*/
 
         }
