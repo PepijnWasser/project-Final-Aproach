@@ -11,7 +11,6 @@ namespace GXPEngine
         readonly string[] _playerThatGotHighScoreLine;
         readonly string _players = "";
         readonly string _scoretoCompare;
-        string path = Path.GetDirectoryName("scoreboard.txt");
 
         readonly int _top1Player;
         readonly int _top2Player;
@@ -35,7 +34,7 @@ namespace GXPEngine
         public bool replay = false;
 
         //-------------------------------endscreen needs new image
-        public EndScreen(int scoreGot) : base("EndScreen.png")
+        public EndScreen(int scoreGot) : base("Endscreen.png")
         {
             _scoreGot = scoreGot;
             string path = Path.GetDirectoryName("scoreboard.txt");

@@ -11,7 +11,7 @@ namespace GXPEngine
     class Score : Canvas
     {
         Level _level;
-        public int score = 10;
+        public int score = 1000;
 
         string path = Path.GetDirectoryName("light pixel 7.ttf");
         
