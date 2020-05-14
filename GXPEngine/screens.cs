@@ -44,16 +44,16 @@ class Screens : Canvas
     {
         if (_level != null)
         {
-            if (_level.ChangeScreen())       
+            if (_level.ChangeScreen())
             {
                 screen = Screen.endScreen;
                 ResetScreens();
             }
-            
+
         }
         if (_endScreen != null)
         {
-            if (_endScreen.ChangeScreen())  
+            if (_endScreen.ChangeScreen())
             {
                 screen = Screen.startScreen;
                 ResetScreens();
@@ -116,13 +116,13 @@ class Screens : Canvas
         if (screen == Screen.game)
         {
             _level = new Level();
-            AddChild(_level); 
-             
+            AddChild(_level);
+
         }
         if (screen == Screen.startScreen)
         {
-           _startScreen = new Startscreen();
-           AddChild(_startScreen);
+            _startScreen = new Startscreen();
+            AddChild(_startScreen);
         }
         if (screen == Screen.endScreen)
         {

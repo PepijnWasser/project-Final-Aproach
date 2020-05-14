@@ -30,7 +30,7 @@ namespace GXPEngine
         Font j = new Font(new FontFamily("Light Pixel-7"), 30);
 
         public textonscreen(int top1player, int top1score, int top2player, int top2score, int top3player, int top3score, int top4player, int top4score, int top5player, int top5score, int yourplayernumber, int yourPosition, int scoreGot) : base(600, 800)
-            {
+        {
             _top1player = top1player.ToString();
             _top1score = top1score.ToString();
             _top2player = top2player.ToString();
@@ -44,7 +44,7 @@ namespace GXPEngine
             _yourplayernumber = yourplayernumber.ToString();
             _yourPosition = yourPosition.ToString();
             _scoreGot = scoreGot.ToString();
-            
+
             //sets score and player
             graphics.Clear(Color.Empty);
             /*graphics.DrawString(_top1player, f, Brushes.Cyan, 410, 351);
@@ -64,5 +64,5 @@ namespace GXPEngine
             /*graphics.DrawString(_yourplayernumber, f, Brushes.Cyan, 550, 190);*/
 
         }
-    }   
+    }
 }

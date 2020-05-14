@@ -11,6 +11,7 @@ namespace GXPEngine
         readonly string[] _playerThatGotHighScoreLine;
         readonly string _players = "";
         readonly string _scoretoCompare;
+        string path = Path.GetDirectoryName("scoreboard.txt");
 
         readonly int _top1Player;
         readonly int _top2Player;
@@ -33,11 +34,9 @@ namespace GXPEngine
 
         public bool replay = false;
 
-        public EndScreen(int scoreGot) : base("Endscreen1.png")
+        //-------------------------------endscreen needs new image
+        public EndScreen(int scoreGot) : base("EndScreen.png")
         {
-            /*this.SetXY(0, -10);
-            this.SetScaleXY((float)1.2, (float)1.2);*/
-
             _scoreGot = scoreGot;
             string path = Path.GetDirectoryName("scoreboard.txt");
             string[] lines = File.ReadAllLines(path + "scoreboard.txt");
@@ -393,7 +392,7 @@ namespace GXPEngine
                 {
                     return false;
                 }
-            } 
+            }
             else return false;
         }
 
