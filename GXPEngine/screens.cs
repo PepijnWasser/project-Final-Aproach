@@ -58,6 +58,14 @@ class Screens : Canvas
                 screen = Screen.startScreen;
                 ResetScreens();
             }
+            else
+            {
+                if (_endScreen.replay)
+                {
+                    screen = Screen.game;
+                    ResetScreens();
+                }
+            }
         }
         if (_startScreen != null)
         {
@@ -65,6 +73,14 @@ class Screens : Canvas
             {
                 screen = Screen.game;
                 ResetScreens();
+            }
+            else
+            {
+                if (_startScreen.highscorePressed)
+                {
+                    screen = Screen.endScreen;
+                    ResetScreens();
+                }
             }
         }
     }
