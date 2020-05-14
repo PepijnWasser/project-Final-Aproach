@@ -11,7 +11,6 @@ namespace GXPEngine
         readonly string[] _playerThatGotHighScoreLine;
         readonly string _players = "";
         readonly string _scoretoCompare;
-        string path = Path.GetDirectoryName("scoreboard.txt");
 
         readonly int _top1Player;
         readonly int _top2Player;
@@ -29,11 +28,15 @@ namespace GXPEngine
         readonly int _yourPosition;
         readonly int _scoreGot;
 
-        //-------------------------------endscreen needs new image
-        public EndScreen(int scoreGot) : base("endScreen.png")
+        Sprite playAgain = new Sprite("Restart.png");
+        Sprite exit = new Sprite("Exit1.png");
+
+        public bool replay = false;
+
+        public EndScreen(int scoreGot) : base("Endscreen1.png")
         {
-            this.SetXY(0, -10);
-            this.SetScaleXY((float)1.2, (float)1.2);
+            /*this.SetXY(0, -10);
+            this.SetScaleXY((float)1.2, (float)1.2);*/
 
             _scoreGot = scoreGot;
             string path = Path.GetDirectoryName("scoreboard.txt");
@@ -362,20 +365,46 @@ namespace GXPEngine
             //---------------------------potentionally better way to do things
             textonscreen values = new textonscreen(_top1Player, _top1Score, _top2Player, _top2Score, _top3Player, _top3Score, _top4Player, _top4Score, _top5Player, _top5Score, _yourPlayerNumber, _yourPosition, _scoreGot);
             AddChild(values);
+
+            AddChild(playAgain);
+            AddChild(exit);
+
+            playAgain.SetXY(783, 15);
+            exit.SetXY(878, 15);
+        }
+
+        void Update()
+        {
+            PlayAgain();
         }
 
         /// ///////////////////////////////////////////////////////////////////////
-        /// if R is pressed, return true
+        /// if left click is pressed over "X" icon, return true
         /// ///////////////////////////////////////////////////////////////////////
         public bool ChangeScreen()
         {
-            if (Input.GetKey(Key.Z))
+            if (exit.HitTestPoint(Input.mouseX, Input.mouseY))
             {
-                return true;
-            }
-            else
+                if (Input.GetMouseButton(0))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } 
+            else return false;
+        }
+
+        void PlayAgain()
+        {
+            if (playAgain.HitTestPoint(Input.mouseX, Input.mouseY))
             {
-                return false;
+                if (Input.GetMouseButton(0))
+                {
+                    replay = true;
+                }
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
+
 namespace GXPEngine
 {
     class textonscreen : Canvas
@@ -22,7 +23,7 @@ namespace GXPEngine
         string _yourPosition;
         string _scoreGot;
 
-        Font f = new Font(new FontFamily("Verdana"), 20);
+        Font f = new Font(new FontFamily("Light Pixel-7"), 20);
 
         public textonscreen(int top1player, int top1score, int top2player, int top2score, int top3player, int top3score, int top4player, int top4score, int top5player, int top5score, int yourplayernumber, int yourPosition, int scoreGot) : base(600, 800)
             {
@@ -42,21 +43,22 @@ namespace GXPEngine
             
             //sets score and player
             graphics.Clear(Color.Empty);
-            graphics.DrawString(_top1player, f, Brushes.White, 410, 351);
-            graphics.DrawString(_top2player, f, Brushes.White, 410, 400);
-            graphics.DrawString(_top3player, f, Brushes.White, 410, 449);
-            graphics.DrawString(_top4player, f, Brushes.White, 410, 498);
-            graphics.DrawString(_top5player, f, Brushes.White, 410, 547);
+            /*graphics.DrawString(_top1player, f, Brushes.Cyan, 410, 351);
+            graphics.DrawString(_top2player, f, Brushes.Cyan, 410, 400);
+            graphics.DrawString(_top3player, f, Brushes.Cyan, 410, 449);
+            graphics.DrawString(_top4player, f, Brushes.Cyan, 410, 498);
+            graphics.DrawString(_top5player, f, Brushes.Cyan, 410, 547);*/
 
-            graphics.DrawString(_top1score, f, Brushes.White, 175, 351);
-            graphics.DrawString(_top2score, f, Brushes.White, 175, 400);
-            graphics.DrawString(_top3score, f, Brushes.White, 175, 449);
-            graphics.DrawString(_top4score, f, Brushes.White, 175, 498);
-            graphics.DrawString(_top5score, f, Brushes.White, 175, 547);
+            graphics.DrawString(_top1score, f, Brushes.Cyan, 400, 240);
+            graphics.DrawString(_top2score, f, Brushes.Cyan, 400, 302);
+            graphics.DrawString(_top3score, f, Brushes.Cyan, 400, 375);
+            graphics.DrawString(_top4score, f, Brushes.Cyan, 400, 470);
+            graphics.DrawString(_top5score, f, Brushes.Cyan, 400, 585);
 
             //sets your current achievment and player number
-            graphics.DrawString(_scoreGot, f, Brushes.White, 275, 624);
-            graphics.DrawString(_yourplayernumber, f, Brushes.White, 410, 624);
+            graphics.DrawString(_scoreGot, f, Brushes.Cyan, 500, 190);
+            /*graphics.DrawString(_yourplayernumber, f, Brushes.Cyan, 550, 190);*/
+
         }
     }   
 }

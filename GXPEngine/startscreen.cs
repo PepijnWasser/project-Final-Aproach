@@ -45,7 +45,7 @@ namespace GXPEngine
         }
 
         /// ///////////////////////////////////////////////////////////////////////
-        /// if left click is pressed, return true
+        /// if left click is pressed over play button, return true
         /// ///////////////////////////////////////////////////////////////////////
         public bool ChangeScreen()
         {

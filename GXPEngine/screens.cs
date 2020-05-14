@@ -58,6 +58,14 @@ class Screens : Canvas
                 screen = Screen.startScreen;
                 ResetScreens();
             }
+            else
+            {
+                if (_endScreen.replay)
+                {
+                    screen = Screen.game;
+                    ResetScreens();
+                }
+            }
         }
         if (_startScreen != null)
         {
