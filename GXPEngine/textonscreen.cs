@@ -24,7 +24,7 @@ namespace GXPEngine
 
         Font f, g, h, i, j;
 
-        public textonscreen(int top1player, int top1score, int top2player, int top2score, int top3player, int top3score, int top4player, int top4score, int top5player, int top5score, int yourplayernumber, int yourPosition, int scoreGot) : base(600, 800)
+        public textonscreen(int top1player, int top1score, int top2player, int top2score, int top3player, int top3score, int top4player, int top4score, int top5player, int top5score, int yourplayernumber, int yourPosition, int scoreGot) : base(960, 720)
         {
             _pfc.AddFontFile(path + "light pixel 7.ttf");
             f = new Font(_pfc.Families[0], 10, FontStyle.Regular);
@@ -49,9 +49,8 @@ namespace GXPEngine
             graphics.DrawString(_top4score, i, Brushes.Cyan, 490, 465);
             graphics.DrawString(_top5score, j, Brushes.Cyan, 480, 595);
 
-            //sets your current achievment and player number
-            graphics.DrawString(_scoreGot, h, Brushes.Cyan, 550, 155);
-            /*graphics.DrawString(_yourplayernumber, f, Brushes.Cyan, 550, 190);*/
+            //sets your current achievment
+            graphics.DrawString(_scoreGot, h, Brushes.Cyan, 620, 155);
 
         }
     }

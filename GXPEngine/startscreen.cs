@@ -25,9 +25,9 @@ namespace GXPEngine
             AddChild(highscore);
             AddChild(exit);
 
-            play.SetXY(40, 230);
-            highscore.SetXY(40, 320);
-            exit.SetXY(40, 410);
+            play.SetXY(740, 230);
+            highscore.SetXY(740, 320);
+            exit.SetXY(740, 410);
 
             scaleDown(0.65f);
         }
