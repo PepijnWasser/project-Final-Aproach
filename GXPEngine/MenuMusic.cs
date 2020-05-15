@@ -30,7 +30,7 @@ namespace GXPEngine
 
         public void NewMusic()
         {
-            _music = new Sound("algorithm.wav", false, false);
+            _music = new Sound("algorithm.wav", true, false);
         }
 
         public void StopMusic()
